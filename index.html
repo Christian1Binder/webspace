@@ -1,672 +1,225 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0f172a">
-<title>CyberOffz: Ultimate Trainer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberOffz | Security Training Platform</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --primary: #3b82f6;
+            --accent: #22c55e;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --glow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231e293b%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2270%22>🛡️</text></svg>">
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
-<style>
-:root {
-  --bg: #0f172a; --panel: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
-  --accent: #3b82f6; --success: #22c55e; --error: #ef4444; --border: rgba(255,255,255,0.1);
-  --warning: #f59e0b;
-}
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+        /* HEADER */
+        header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100; background: rgba(15, 23, 42, 0.9);
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px; letter-spacing: -1px; }
+        .nav-btn { background: var(--surface); color: var(--text); padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .nav-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-/* UTILS */
-.wrap { width:100%; max-width:850px; margin:0 auto; padding:20px; padding-bottom:100px; flex:1; display:flex; flex-direction:column; position:relative; }
-.scroll-wrap { overflow-y:auto; flex:1; -webkit-overflow-scrolling: touch; }
-.hidden { display:none !important; }
-h1, h2, h3 { margin:0 0 10px 0; }
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: var(--muted); font-size: 1.2rem; margin-bottom: 40px; }
+        
+        .cta-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-/* BUTTONS */
-.btn { border:none; padding:16px 24px; border-radius:12px; font-weight:bold; cursor:pointer; font-size:1.1rem; color:white; transition:0.2s; display:inline-flex; align-items:center; justify-content:center; gap:8px; touch-action: manipulation; }
-.btn:active { transform:scale(0.98); }
-.btn-primary { background:var(--accent); box-shadow:0 4px 12px rgba(59,130,246,0.3); }
-.btn-exam { background:var(--warning); color:#000; }
-.btn-outline { background:transparent; border:1px solid var(--border); color:var(--muted); font-size:0.9rem; padding:10px 16px; }
-.btn-block { width:100%; }
+        /* MODULE GRID */
+        .grid-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
 
-/* START SCREEN */
-#start-screen { text-align:center; }
-.mode-card { background:var(--panel); border:1px solid var(--border); padding:20px; border-radius:16px; margin-bottom:15px; text-align:left; cursor:pointer; transition:0.2s; display:flex; justify-content:space-between; align-items:center; }
-.mode-card:active { background:rgba(255,255,255,0.05); border-color:var(--accent); }
-.tag { font-size:0.75rem; padding:4px 8px; border-radius:6px; background:rgba(255,255,255,0.1); font-weight:bold; }
+        .card {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 16px;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .card-icon { font-size: 2rem; margin-bottom: 15px; display: block; }
+        .card h3 { margin-bottom: 10px; font-size: 1.2rem; }
+        .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 15px;
+        }
 
-/* TRAINER MODE */
-.top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; font-size:0.9rem; color:var(--muted); }
-.streak-box { color:var(--accent); font-weight:bold; font-size:1.1rem; }
-.progress-track { height:8px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; margin-bottom:20px; }
-.progress-fill { height:100%; background:var(--accent); width:0%; transition:width 0.3s; }
-.card { background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:25px; display:flex; flex-direction:column; gap:20px; box-shadow:0 10px 30px rgba(0,0,0,0.3); margin-bottom:20px; }
-.q-meta { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); font-weight:bold; }
-.q-text { font-size:1.35rem; line-height:1.45; font-weight:700; }
-.opt-grid { display:grid; gap:12px; }
-.opt-btn { background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:18px; border-radius:12px; color:var(--text); text-align:left; cursor:pointer; transition:0.1s; display:flex; align-items:center; min-height:60px; }
-.opt-btn:active:not(.disabled) { background:rgba(255,255,255,0.1); transform:scale(0.99); }
-.opt-key { background:rgba(0,0,0,0.3); width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:6px; margin-right:15px; font-size:0.9rem; font-family:monospace; border:1px solid var(--border); color:var(--muted); flex-shrink:0; }
-.opt-btn.correct { background:rgba(34,197,94,0.15); border-color:var(--success); color:var(--success); }
-.opt-btn.wrong { background:rgba(239,68,68,0.15); border-color:var(--error); color:var(--error); opacity:0.6; }
-.opt-btn.disabled { pointer-events:none; }
+        /* STATS */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+        .stat-item { text-align: center; }
+        .stat-val { font-size: 2.5rem; font-weight: 800; color: var(--text); display: block; }
+        .stat-label { color: var(--muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-/* EXPLANATION BOX */
-.expl-box { padding:15px; border-radius:12px; margin-top:0px; display:none; animation:fadeIn 0.3s; font-size:0.95rem; line-height:1.5; border-left:4px solid transparent; background:rgba(0,0,0,0.2); }
-.expl-box.is-correct { border-left-color:var(--success); }
-.expl-box.is-wrong { border-left-color:var(--error); }
-.expl-title { font-weight:bold; margin-bottom:5px; display:block; }
-
-/* EXAM MODE */
-.exam-item { background:var(--panel); padding:20px; border-radius:12px; border:1px solid var(--border); margin-bottom:15px; }
-.exam-q { font-size:1.1rem; font-weight:600; margin-bottom:15px; }
-.exam-opt { display:flex; align-items:start; gap:15px; padding:12px; cursor:pointer; border-radius:8px; transition:background 0.2s; }
-.exam-opt:active { background:rgba(255,255,255,0.05); }
-.exam-opt input { margin-top:4px; transform:scale(1.3); }
-.exam-expl { margin-top:15px; padding-top:15px; border-top:1px solid var(--border); color:var(--muted); font-size:0.9rem; display:none; }
-.exam-item.graded-correct { border-color:var(--success); }
-.exam-item.graded-wrong { border-color:var(--error); }
-.exam-item.graded-correct .exam-expl, .exam-item.graded-wrong .exam-expl { display:block; }
-.exam-score-box { background:var(--panel); padding:30px; border-radius:20px; margin-bottom:20px; text-align:center; border:1px solid var(--border); }
-
-@keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
-</style>
+        /* FOOTER */
+        footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.9rem; }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .stats { gap: 20px; }
+        }
+    </style>
 </head>
 <body>
 
-<div id="start-screen" class="wrap scroll-wrap">
-    <div style="margin:40px 0; text-align:center;">
-        <div style="font-size:3rem; margin-bottom:10px;">🛡️</div>
-        <h1>CyberOffz Lernportal</h1>
-        <p style="color:var(--muted)">Wähle deinen Modus.</p>
-    </div>
-    <div class="mode-card" onclick="initTrainer('ALL')">
-        <div>
-            <h3>🚀 Speed-Trainer (Alles)</h3>
-            <div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Karteikarten • Sofort-Feedback • Vibra</div>
-        </div>
-        <div class="tag" style="background:var(--accent)">LERNEN</div>
-    </div>
-    <div class="mode-card" onclick="initExam()">
-        <div>
-            <h3>📝 Prüfungsmodus (45)</h3>
-            <div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Listenansicht • Ernstfall • Note</div>
-        </div>
-        <div class="tag" style="background:var(--warning); color:#000;">TEST</div>
-    </div>
-    <h3 style="margin-top:30px; border-bottom:1px solid var(--border); padding-bottom:10px;">Themen-Filter</h3>
-    <div id="module-list" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"></div>
-</div>
+    <header>
+        <div class="logo">🛡️ CyberOffz</div>
+        <a href="trainer.html" class="nav-btn">Login</a>
+    </header>
 
-<div id="trainer-screen" class="wrap scroll-wrap hidden">
-    <div class="top-bar">
-        <button class="btn btn-outline" onclick="location.reload()">Beenden</button>
-        <div class="streak-box">🔥 <span id="t-streak">0</span></div>
-    </div>
-    <div class="progress-track"><div id="t-progress" class="progress-fill"></div></div>
-    
-    <div class="card">
-        <div class="q-meta">
-            <span id="t-mod">MODUL</span> • <span id="t-idx">1/10</span>
-            <span id="t-retry-badge" class="hidden" style="color:var(--error); margin-left:10px;">⚠ WIEDERHOLUNG</span>
-        </div>
-        <div class="q-text" id="t-question"></div>
-        <div class="opt-grid" id="t-options"></div>
+    <section class="hero">
+        <h1>Wissen ist deine <br><span style="color: var(--primary)">stärkste Firewall.</span></h1>
+        <p>Die moderne Lernplattform für Informationssicherheit, Datenschutz und Cyber-Defense. Trainiere spezifische Module oder simuliere den Ernstfall.</p>
         
-        <div id="t-expl" class="expl-box">
-            <span class="expl-title" id="t-expl-title"></span>
-            <span id="t-expl-text"></span>
+        <div class="cta-group">
+            <a href="trainer.html" class="btn btn-primary">🚀 Training Starten</a>
+            <a href="#modules" class="btn btn-secondary">↓ Module ansehen</a>
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stat-item">
+            <span class="stat-val">96+</span>
+            <span class="stat-label">Lernfragen</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-val">6</span>
+            <span class="stat-label">Fach-Module</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-val">∞</span>
+            <span class="stat-label">Wiederholungen</span>
         </div>
     </div>
-    
-    <button id="next-btn" class="btn btn-primary btn-block" style="display:none; margin-bottom:30px;" onclick="nextCard()">Nächste Frage ➔</button>
-</div>
 
-<div id="exam-screen" class="wrap scroll-wrap hidden">
-    <div class="top-bar">
-        <button class="btn btn-outline" onclick="if(confirm('Prüfung abbrechen?')) location.reload()">Abbrechen</button>
-        <div>Prüfungssimulation</div>
-    </div>
-    <div id="exam-result-header" class="hidden"></div>
-    <div id="exam-list"></div>
-    <div style="margin-top:30px; padding-top:20px; border-top:1px solid var(--border);">
-        <button id="btn-submit-exam" class="btn btn-primary btn-block" onclick="submitExam()">Prüfung jetzt abgeben</button>
-    </div>
-</div>
+    <section id="modules" class="grid-section">
+        <h2 class="section-title">Wähle dein Missionsziel</h2>
+        <div class="grid">
+            <a href="trainer.html" class="card">
+                <span class="card-icon">⚡</span>
+                <h3>Speed Trainer</h3>
+                <p>Der gesamte Fragenkatalog im Random-Modus. Perfekt für schnelles Wiederholen und Festigen.</p>
+                <span class="badge">BELIEBT</span>
+            </a>
 
-<script>
-/* --- 96 FRAGEN DATENBANK --- */
-const BANK = [
-    // --- GRUNDLAGEN ---
-    { q: "Welches Schutzziel wird verletzt, wenn ein Angreifer eine Webseite so überlastet, dass sie nicht mehr erreichbar ist?", a: "Verfügbarkeit", e: "Verfügbarkeit garantiert den Zugriff. DDoS-Angriffe zielen darauf ab, genau diesen Zugriff zu unterbinden.", o: ["Vertraulichkeit", "Verfügbarkeit", "Integrität", "Authentizität"], m: "GRUNDLAGEN" },
-    { q: "Was beschreibt die 'Integrität' von Informationen?", a: "Dass Daten nicht unbefugt oder unbemerkt verändert werden können.", e: "Integrität schützt vor Manipulation. Daten müssen vollständig und korrekt sein.", o: ["Dass Daten nur für Berechtigte lesbar sind", "Dass Daten jederzeit abrufbar sind", "Dass Daten nicht unbefugt oder unbemerkt verändert werden können.", "Dass der Absender eindeutig identifizierbar ist"], m: "GRUNDLAGEN" },
-    { q: "Was ist ein 'SSI' (Security Significant Item)?", a: "Sicherheitsempfindliche Gegenstände oder Komponenten.", e: "SSIs sind kritische Bauteile (z.B. in Waffensystemen oder IT), die besonderen Schutz benötigen.", o: ["Software-Security-Interface", "Sicherheitsempfindliche Gegenstände oder Komponenten.", "Sicherheits-Service-Instanz", "System-Sicherheits-Index"], m: "GRUNDLAGEN" },
-    { q: "Welche Einstufung ist höher: VS-GEHEIM oder VS-VERTRAULICH?", a: "VS-GEHEIM", e: "Reihenfolge: VS-NfD < VS-VERTRAULICH < VS-GEHEIM < STRENG GEHEIM.", o: ["VS-NfD", "VS-VERTRAULICH", "VS-GEHEIM", "Beide sind gleich"], m: "GRUNDLAGEN" },
-    { q: "Wie lautet die Kernformel für die Informationssicherheit?", a: "Gefährdung = Bedrohung + Schwachstelle", e: "Eine Bedrohung allein ist harmlos. Erst wenn sie auf eine Schwachstelle trifft, entsteht eine Gefährdung.", o: ["Risiko = Hacker x Zeit", "Gefährdung = Bedrohung + Schwachstelle", "Sicherheit = Firewall + Antivirus", "Schutz = Passwort + Verschlüsselung"], m: "GRUNDLAGEN" },
-    { q: "Wer trägt die Gesamtverantwortung für die Informationssicherheit in einer Dienststelle?", a: "Der Dienststellenleiter", e: "Verantwortung ist unteilbar. Der DStL haftet, der ISB berät und unterstützt nur.", o: ["Der IT-Offizier", "Der ISB", "Der Dienststellenleiter", "Der Kryptoverwalter"], m: "GRUNDLAGEN" },
-    { q: "Welches Dokument muss jeder unterschreiben, der mit VS arbeitet?", a: "Sicherheitsbelehrung / Verpflichtung auf den Geheimschutz.", e: "Ohne Belehrung kein Zugriff. Dies ist die formale Grundlage für den Umgang mit VS.", o: ["Mietvertrag", "Sicherheitsbelehrung / Verpflichtung auf den Geheimschutz.", "Urlaubsantrag", "Waffenschein"], m: "GRUNDLAGEN" },
-    { q: "Wie wird der Status von Personen bezeichnet, die VS bearbeiten und Kenntnis von ihrem Inhalt erhalten?", a: "Zugang zu Verschlusssachen", e: "'Zugang' bedeutet inhaltliche Kenntnisnahme. 'Zugriff' bezieht sich meist auf IT-Systeme.", o: ["Zutritt zu VS-Bereichen", "Zugriff auf IT-Systeme", "Zugang zu Verschlusssachen", "Ermächtigung zur Akteneinsicht"], m: "GRUNDLAGEN" },
-    { q: "Welches sind die drei klassischen Authentifizierungsmerkmale?", a: "Wissen, Besitz, Eigenschaft", e: "Wissen (Passwort), Besitz (Token/Smartcard), Eigenschaft (Biometrie).", o: ["Passwort, PIN, Token", "Wissen, Besitz, Eigenschaft", "Ausweis, Unterschrift, Gesicht", "Name, Dienstgrad, PK"], m: "GRUNDLAGEN" },
+            <a href="trainer.html" class="card">
+                <span class="card-icon">📝</span>
+                <h3>Prüfungssimulation</h3>
+                <p>45 Fragen, keine Hilfestellung, knallharte Auswertung. Bist du bereit für die Zertifizierung?</p>
+                <span class="badge" style="color: var(--accent); background: rgba(34,197,94,0.1)">TEST MODUS</span>
+            </a>
 
-    // --- BEDROHUNGEN & APT ---
-    { q: "Welche Phase der Cyber Kill Chain beschreibt das Ausnutzen einer Sicherheitslücke auf dem Zielsystem?", a: "Exploitation", e: "Hier wird der Schadcode ausgeführt, um die Kontrolle zu übernehmen (z.B. Buffer Overflow).", o: ["Weaponization", "Delivery", "Exploitation", "Installation"], m: "BEDROHUNGEN" },
-    { q: "In der 'Pyramid of Pain' sind Hash-Werte für Angreifer leicht zu ändern. Welches Element ist am schwierigsten zu ändern?", a: "TTPs (Tactics, Techniques & Procedures)", e: "Verhalten zu ändern erfordert Umschulung und Neuentwicklung beim Angreifer.", o: ["IP-Adressen", "Domainnamen", "Werkzeuge", "TTPs (Tactics, Techniques & Procedures)"], m: "BEDROHUNGEN" },
-    { q: "Was ist das Hauptmerkmal eines 'APT' (Advanced Persistent Threat)?", a: "Langanhaltende, zielgerichtete und hochkomplexe Angriffe.", e: "Persistenz ist der Schlüssel: Der Angreifer will dauerhaft im Netz bleiben.", o: ["Ein automatisierter Virenscan", "Ein kurzer, zufälliger Angriff", "Langanhaltende, zielgerichtete und hochkomplexe Angriffe.", "Ein Angriff durch gelangweilte Jugendliche"], m: "BEDROHUNGEN" },
-    { q: "Was beschreibt 'Lateral Movement'?", a: "Das Ausbreiten des Angreifers innerhalb des Netzwerks von System zu System.", e: "Bewegung vom Einstiegspunkt (Patient Zero) hin zu den wertvollen Daten.", o: ["Das Herunterladen von Daten", "Das Löschen von Log-Dateien", "Das Ausbreiten des Angreifers innerhalb des Netzwerks von System zu System.", "Die erste Infektion per E-Mail"], m: "BEDROHUNGEN" },
-    { q: "Was beschreibt die 'Reconnaissance' in der Cyber Kill Chain?", a: "Das Sammeln von Informationen über das Ziel.", e: "Aufklärung: OSINT, Scans, E-Mail-Adressen sammeln vor dem Angriff.", o: ["Das Erstellen von Exploits", "Das Sammeln von Informationen über das Ziel.", "Das Installieren einer Backdoor", "Den Abfluss von Daten"], m: "BEDROHUNGEN" },
-    { q: "Welches Framework bietet eine Wissensdatenbank für Taktiken und Techniken von Angreifern basierend auf Realwelt-Beobachtungen?", a: "MITRE ATT&CK", e: "Der Industriestandard zur Beschreibung von Angreiferverhalten (TTPs).", o: ["Cyber Kill Chain", "Diamond Model", "MITRE ATT&CK", "ISO 27001"], m: "BEDROHUNGEN" },
-    { q: "In der Pyramid of Pain: Was sind 'Tools'?", a: "Software, die der Angreifer nutzt (z.B. Mimikatz, PowerShell).", e: "Tools sind Werkzeuge. Sie sind schwerer zu tauschen als IPs, aber leichter als TTPs.", o: ["IP-Adressen des Angreifers", "Software, die der Angreifer nutzt (z.B. Mimikatz, PowerShell).", "Das strategische Ziel des Angriffs", "Die Registrierungsdaten der Domain"], m: "BEDROHUNGEN" },
-    { q: "Welches Modell nutzt die vier Kernpunkte: Akteur, Fähigkeit, Infrastruktur und Opfer?", a: "Diamond Model", e: "Ein Modell zur Analyse von Einzelereignissen und deren Zusammenhängen.", o: ["Lockheed Martin Kill Chain", "Diamond Model", "STRIDE", "PASTA"], m: "BEDROHUNGEN" },
-    { q: "Was versteht man unter 'Weaponization'?", a: "Koppelung eines Exploits mit einer Hintertür zu einem auslieferbaren Paket.", e: "Der Bau der 'Cyber-Waffe' (z.B. PDF mit Exploit).", o: ["Das physische Bewaffnen von Wachposten", "Koppelung eines Exploits mit einer Hintertür zu einem auslieferbaren Paket.", "Das Scannen von Ports", "Das Verschlüsseln der Festplatte"], m: "BEDROHUNGEN" },
-    { q: "Was ist ein 'IOC' (Indicator of Compromise)?", a: "Ein technisches Merkmal (z.B. Hash, IP), das auf eine Infektion hinweist.", e: "Spuren eines Angriffs (Forensik), z.B. C2-Server-IP oder Datei-Hash.", o: ["Ein Zertifikat für sichere Software", "Ein technisches Merkmal (z.B. Hash, IP), das auf eine Infektion hinweist.", "Ein spezieller Dienstgrad im CIR", "Eine Methode zur Passwort-Verschlüsselung"], m: "BEDROHUNGEN" },
-    { q: "Was ist 'Social Engineering'?", a: "Die Manipulation von Menschen, um an geheime Informationen zu gelangen.", e: "Angriff auf die 'Human Firewall'.", o: ["Das Programmieren von sozialen Netzwerken", "Die Manipulation von Menschen, um an geheime Informationen zu gelangen.", "Ein spezieller Ingenieurstudiengang", "Das Hacken von Datenbanken"], m: "BEDROHUNGEN" },
-    { q: "Welches Modell hilft dabei, Angriffe aus der Sicht der Verteidiger zu simulieren (Red Teaming)?", a: "MITRE ATT&CK Matrix", e: "Red Teams nutzen ATT&CK, um realistische Angriffsszenarien nachzubauen.", o: ["Wasserfallmodell", "Diamond Model", "MITRE ATT&CK Matrix", "V-Modell"], m: "BEDROHUNGEN" },
-    { q: "Was ist ein wesentlicher Vorteil von Bedrohungsmodellierung?", a: "Einblicke in das Verhalten von Angreifern zu erhalten", e: "Weg von reiner Technik, hin zum Verstehen des Gegners.", o: ["Einblicke in das Verhalten von Angreifern zu erhalten", "Vollständige Automatisierung der Abwehr", "Einsparung von IT-Personal", "Ersatz für physische Sicherheitsmaßnahmen"], m: "BEDROHUNGEN" },
-    { q: "TTPs (Tactics, Techniques & Procedures) sind sehr beständig und können deswegen leichter automatisiert erkannt werden. Ist diese Aussage korrekt?", a: "Nein, das ist falsch.", e: "TTPs sind schwer zu erkennen, da sie oft legitimes Verhalten simulieren. Hashwerte sind leicht zu erkennen.", o: ["Ja, das ist richtig.", "Nein, das ist falsch.", "Nur bei privatem WLAN.", "Nur bei Hardware-Angriffen."], m: "BEDROHUNGEN" },
-    { q: "Was ist ein wesentlicher Nachteil des Diamond Models?", a: "Es ist schwer anwendbar auf komplexe Bedrohungen.", e: "Es bildet komplexe Angriffsketten (Chains) oft schlechter ab als die Kill Chain.", o: ["Es benötigt zu viel Rechenleistung.", "Es ist schwer anwendbar auf komplexe Bedrohungen.", "Es ist nur für Phishing-Mails geeignet.", "Es wurde vom BSI verboten."], m: "BEDROHUNGEN" },
-    { q: "Living-off-the-Land (LotL) Techniken erschweren die Erkennung, da sie übliche, bereits vorhandene Software verwenden. Ist das korrekt?", a: "Ja, das ist richtig.", e: "Nutzung von PowerShell, WMI etc. statt eigener Malware-Dateien.", o: ["Ja, das ist richtig.", "Nein, das ist falsch.", "LotL bezieht sich nur auf Hardware-Diebstahl.", "LotL wird nur von Einzeltätern genutzt."], m: "BEDROHUNGEN" },
-    { q: "Liegt der primäre Fokus bei MITRE ATT&CK auf IOCs (Indicators of Compromise)?", a: "Nein, das ist falsch.", e: "Fokus liegt auf Taktiken und Techniken (Verhalten), nicht auf einfachen IOCs.", o: ["Ja, das ist richtig.", "Nein, das ist falsch.", "Nur bei Ransomware-Angriffen.", "Nur für VS-NfD eingestufte Netze."], m: "BEDROHUNGEN" },
-    { q: "Ein Virus ist ein selbstreplizierender Code, der kein Wirtsprogramm benötigt. Korrekt?", a: "Falsch, ein Wurm benötigt kein Wirtsprogramm.", e: "Virus = braucht Wirt (Datei). Wurm = eigenständig im Netz.", o: ["Richtig.", "Falsch, ein Trojaner benötigt kein Wirtsprogramm.", "Falsch, ein Wurm benötigt kein Wirtsprogramm.", "Falsch, Malware benötigt immer Internet."], m: "BEDROHUNGEN" },
-    { q: "Als seriöse Sicherheitssoftware getarnte Schadsoftware bezeichnet man als...", a: "Rougeware", e: "Auch 'Scareware' genannt. Täuscht Infektion vor, um Geld zu erpressen.", o: ["Spyware", "Rougeware", "Adware", "Firmware"], m: "BEDROHUNGEN" },
-    { q: "Was bezeichnet KEIN typisches Einfallstor für Ransomware?", a: "MFA (Mehrfaktorauthentifizierung)", e: "MFA verhindert Angriffe. Phishing, RDP und Schwachstellen ermöglichen sie.", o: ["Phishing-E-Mails", "MFA (Mehrfaktorauthentifizierung)", "RDP-Schwachstellen", "Ungepatchte VPN-Server"], m: "BEDROHUNGEN" },
-    { q: "Was versteht man unter 'Vishing'?", a: "Phishing per Telefonanruf", e: "Voice Phishing (z.B. Fake-Support-Anrufe).", o: ["Phishing per Video-Stream", "Phishing per Telefonanruf", "Verschlüsselung von Festplatten", "Abfangen von Funksignalen"], m: "BEDROHUNGEN" },
-    { q: "Was beschreibt KEINE Quelle für OSINT (Open Source Intelligence)?", a: "Intranet der Bundeswehr", e: "OSINT nutzt nur öffentlich zugängliche Quellen. Das Intranet ist intern/geschlossen.", o: ["Soziale Medien", "Zeitungsartikel", "Öffentliche Datenbanken", "Intranet der Bundeswehr"], m: "BEDROHUNGEN" },
-    { q: "Beim 'Credential Stuffing' werden häufig genutzte Passwörter (z.B. 'Passwort123') bei vielen verschiedenen Accounts getestet. Korrekt?", a: "Nein, das ist falsch (das wäre Password Spraying).", e: "Credential Stuffing nutzt geleakte Zugangsdaten (User+Passwort) aus anderen Hacks.", o: ["Ja, das ist richtig.", "Nein, das ist falsch (das wäre Password Spraying).", "Nein, das wäre Social Engineering.", "Ja, das ist das Standardvorgehen bei Brute Force."], m: "BEDROHUNGEN" },
-    { q: "Was unterscheidet Spear-Phishing von regulärem Phishing?", a: "Es handelt sich um einen gezielten Angriff auf eine bestimmte Person oder Organisation.", e: "Masse (Phishing) vs. Klasse/Zielgenauigkeit (Spear Phishing).", o: ["Es wird nur über SMS verschickt.", "Es handelt sich um einen gezielten Angriff auf eine bestimmte Person oder Organisation.", "Es wird nur von staatlichen Akteuren genutzt.", "Es ist technisch nicht nachweisbar."], m: "BEDROHUNGEN" },
-    { q: "Welches Ziel verfolgt SEO-Poisoning?", a: "Umleiten von Nutzern über Suchmaschinen auf schädliche Seiten.", e: "Manipulation von Suchergebnissen, um Opfer auf Malware-Seiten zu locken.", o: ["Das Löschen von Google-Einträgen.", "Umleiten von Nutzern über Suchmaschinen auf schädliche Seiten.", "Das Hacken von Datenbanken über SQL-Injections.", "Das Versenden von Spam-Mails."], m: "BEDROHUNGEN" },
-    { q: "Welche Maßnahme verringert das Risiko von Zero-Day-Exploits NICHT?", a: "Regelmäßige Backups", e: "Backups helfen bei der Wiederherstellung, verhindern aber nicht den Exploit selbst.", o: ["Netzsegmentierung", "Sandboxing", "Regelmäßige Backups", "Intrusion Detection Systeme"], m: "BEDROHUNGEN" },
-    { q: "Handelt es sich bei APT-Gruppen grundsätzlich NUR um Bedrohungsakteure, die im Auftrag einer Regierung handeln?", a: "Nein, das ist falsch.", e: "Auch hochprofessionelle Cyberkriminelle (Ransomware-Gangs) können APT-Charakteristika aufweisen.", o: ["Ja, das ist die Definition.", "Nein, das ist falsch.", "Nur wenn sie aus Europa kommen.", "Ja, aber nur im Kriegsfall."], m: "BEDROHUNGEN" },
-    { q: "Welche Technik wird oft von APT-Gruppen genutzt, um den Erstzugang zu einem Netzwerk zu erhalten?", a: "Spear-Phishing", e: "Die E-Mail ist nach wie vor das Einfallstor Nr. 1.", o: ["DDoS-Angriffe", "Spear-Phishing", "Physischer Einbruch", "Brute-Force auf WLAN-Passwörter"], m: "BEDROHUNGEN" },
-    { q: "Welcher Punkt trägt NICHT zur Schwierigkeit der Attribution (Zuweisung) von Cyberangriffen bei?", a: "Mangelhafte operative Sicherheitsmaßnahmen der Verteidiger.", e: "Schlechte Verteidigung macht den Angriff leichter, verschleiert aber nicht die Herkunft des Täters.", o: ["Einsatz von False-Flag-Operationen.", "Nutzung von Standard-Malware.", "Mangelhafte operative Sicherheitsmaßnahmen der Verteidiger.", "Verschleierung über Proxy-Server."], m: "BEDROHUNGEN" },
+            <a href="trainer.html" class="card">
+                <span class="card-icon">🔒</span>
+                <h3>Kryptosicherheit</h3>
+                <p>Symmetrische vs. Asymmetrische Verfahren, Schlüsselverteilung und Hardware-Sicherheit.</p>
+                <span class="badge">HARD SKILL</span>
+            </a>
 
-    // --- SCHUTZKONZEPTE ---
-    { q: "Was beschreibt die 'Organisation' im OPTI-Modell?", a: "Regelungen, Konzepte und Richtlinien.", e: "Dienstvorschriften und Prozesse bilden den organisatorischen Rahmen.", o: ["Bauliche Maßnahmen", "Regelungen, Konzepte und Richtlinien.", "Firewalls und Verschlüsselung", "Überprüfung von Mitarbeitern"], m: "SCHUTZKONZEPTE" },
-    { q: "Was ist eine 'WAF' (Web Application Firewall)?", a: "Eine Firewall, die speziell den HTTP/HTTPS-Verkehr auf Anwendungsebene filtert.", e: "Schützt Webserver vor SQL-Injection, XSS und anderen Layer-7-Angriffen.", o: ["Ein Schutz gegen WLAN-Hacker", "Ein Hardware-Schutz für Serverräume", "Eine Firewall, die speziell den HTTP/HTTPS-Verkehr auf Anwendungsebene filtert.", "Ein Tool zur Passwortverwaltung"], m: "SCHUTZKONZEPTE" },
-    { q: "Wofür steht 'SIEM'?", a: "Security Information and Event Management", e: "Zentrale Sammlung und Auswertung von Sicherheitslogs.", o: ["System Information and Electronic Mail", "Security Information and Event Management", "Secure Internal Encryption Mode", "Software Interface for Electronic Monitoring"], m: "SCHUTZKONZEPTE" },
-    { q: "Was ist ein 'Honey Pot'?", a: "Ein Ködersystem, das Angreifer anlocken und deren Verhalten analysieren soll.", e: "Simuliert ein lohnendes Ziel, dient aber nur der Detektion.", o: ["Ein sehr sicheres Passwort", "Ein Backup-Server", "Ein Ködersystem, das Angreifer anlocken und deren Verhalten analysieren soll.", "Eine Verschlüsselungsmethode"], m: "SCHUTZKONZEPTE" },
-    { q: "Was ist der Vorteil von Netzsegmentierung?", a: "Schadsoftware kann sich nicht ungehindert im gesamten Netzwerk ausbreiten.", e: "Schotten dicht machen: Einbruch in Segment A gefährdet nicht Segment B.", o: ["Das Internet wird schneller", "Die Hardware hält länger", "Schadsoftware kann sich nicht ungehindert im gesamten Netzwerk ausbreiten.", "Man spart Strom"], m: "SCHUTZKONZEPTE" },
-    { q: "Welche Säule im PIMO-Modell umfasst die 'Sensibilisierung und Ausbildung'?", a: "Personal", e: "Der Mensch ist oft das schwächste Glied, aber auch die erste Verteidigungslinie.", o: ["Infrastruktur", "Personal", "Organisation", "Methodik"], m: "SCHUTZKONZEPTE" },
-    { q: "Was fällt unter die Säule 'Infrastruktur' (PIMO)?", a: "Zutrittskontrollsysteme, Zäune und Tresore.", e: "Physische Sicherheit (Gebäude, Räume).", o: ["Virenscanner", "Dienstanweisungen", "Zutrittskontrollsysteme, Zäune und Tresore.", "Firewall-Regeln"], m: "SCHUTZKONZEPTE" },
-    { q: "Was ist ein 'IDS' (Intrusion Detection System)?", a: "Ein System, das Angriffe erkennt und alarmiert, aber nicht aktiv blockt.", e: "IDS ist die Alarmanlage (Passiv). IPS (Prevention) wäre der Wachhund, der beißt.", o: ["Ein System zum Löschen von Viren", "Ein System, das Angriffe erkennt und alarmiert, aber nicht aktiv blockt.", "Eine Hardware-Verschlüsselung", "Ein Backup-Verfahren"], m: "SCHUTZKONZEPTE" },
-    { q: "Was ist 'Defense in Depth'?", a: "Ein mehrschichtiges Sicherheitskonzept (gestaffelte Verteidigung).", e: "Zwiebelschalenprinzip: Versagt eine Hürde, greift die nächste.", o: ["Das Vergraben von Servern im Boden", "Ein mehrschichtiges Sicherheitskonzept (gestaffelte Verteidigung).", "Die Verteidigung der Außengrenzen", "Verschlüsselung mit sehr langen Schlüsseln"], m: "SCHUTZKONZEPTE" },
-    { q: "Welches System dient der Filterung von ausgehendem Webverkehr für interne Nutzer?", a: "Forward Proxy", e: "Clients greifen über den Forward Proxy auf das Internet zu (Kontrolle, Caching).", o: ["Reverse Proxy", "Forward Proxy", "WAF", "Honey Pot"], m: "SCHUTZKONZEPTE" },
-    { q: "Wer unterstützt den Dienststellenleiter fachlich bei der Umsetzung der Informationssicherheit?", a: "Der Informationssicherheitsbeauftragte (ISB).", e: "Der ISB ist der zentrale Ansprechpartner und Koordinator für InfoSi.", o: ["Der S6-Offizier", "Der IT-Administrator", "Der Informationssicherheitsbeauftragte (ISB).", "Der Spieß"], m: "SCHUTZKONZEPTE" },
-    { q: "Welche Aufgabe hat der IT-Sicherheitsbeauftragte (IT-SiB)?", a: "Umsetzung technischer Sicherheitsmaßnahmen im IT-System.", o: ["Schreiben von Gesetzen", "Umsetzung technischer Sicherheitsmaßnahmen im IT-System.", "Kontrolle des Speiseplans", "Überprüfung der körperlichen Fitness"], m: "SCHUTZKONZEPTE" },
-    // --- NEUE FRAGEN: DATENSCHUTZ & GRUNDLAGEN (Gemäß Präsentation) ---
-    { 
-        q: "Was versteht man unter dem Gewährleistungsziel 'Nichtverkettung'?", 
-        a: "Zu unterschiedlichen Zwecken erhobene Daten dürfen nicht einfach zusammengeführt werden.", 
-        e: "Daten müssen zweckgebunden verarbeitet werden. Eine wahllose Verknüpfung verschiedener Datenbanken ist unzulässig.", 
-        o: ["Daten müssen nach 10 Jahren automatisch gelöscht werden.", "Daten dürfen nur verschlüsselt gespeichert werden.", "Zu unterschiedlichen Zwecken erhobene Daten dürfen nicht einfach zusammengeführt werden.", "Der Zugriff auf Daten muss lückenlos protokolliert werden."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Welche Daten gehören zu den 'Besonderen personenbezogenen Daten' (BPersDat) gemäß Art. 9 DSGVO?", 
-        a: "Gesundheitsdaten, religiöse Überzeugung oder biometrische Daten.", 
-        e: "Diese Daten gelten als besonders sensibel und schutzbedürftig, da ihr Missbrauch tiefgreifende Auswirkungen auf die Persönlichkeitsrechte hat.", 
-        o: ["Name, Dienstgrad und dienstliche Telefonnummer.", "Gesundheitsdaten, religiöse Überzeugung oder biometrische Daten.", "Private Anschrift und Bankverbindung.", "Personalnummer und Beurteilungen."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Welches Gewährleistungsziel fordert, dass Betroffene ihre Rechte (z.B. Löschung, Auskunft) wahrnehmen können?", 
-        a: "Intervenierbarkeit.", 
-        e: "Der Betroffene muss in den Datenverarbeitungsprozess 'intervenieren' können, um z.B. Fehler zu korrigieren oder Löschungen zu beantragen.", 
-        o: ["Transparenz.", "Intervenierbarkeit.", "Nichtverkettung.", "Integrität."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Was besagt das Prinzip der 'Datenminimierung'?", 
-        a: "Die Verarbeitung ist auf das notwendige und dem Zweck angemessene Maß zu beschränken.", 
-        e: "Es dürfen keine Daten 'auf Vorrat' gesammelt werden. Nur das, was für den konkreten Auftrag wirklich gebraucht wird, darf erhoben werden.", 
-        o: ["Daten müssen so klein wie möglich komprimiert werden.", "Die Verarbeitung ist auf das notwendige und dem Zweck angemessene Maß zu beschränken.", "Es dürfen maximal 100 Datensätze pro Datei gespeichert werden.", "Daten dürfen nur auf USB-Sticks gespeichert werden."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Welchem Schutzbereich werden 'Besondere personenbezogene Daten' (BPersDat) immer zugeordnet?", 
-        a: "Schutzbereich 3.", 
-        e: "Aufgrund des hohen Schadenspotenzials für den Betroffenen fallen BPersDat (z.B. Gesundheit) immer in die höchste Schutzkategorie.", 
-        o: ["Schutzbereich 1.", "Schutzbereich 2.", "Schutzbereich 3.", "Schutzbereich 4."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Was zählt NICHT zu den 'Besonderen personenbezogenen Daten' (BPersDat)?", 
-        a: "Das private Bankkonto.", 
-        e: "Bankdaten sind zwar sensibel (Schutzbereich 2), gehören aber laut Art. 9 DSGVO nicht zur Kategorie der BPersDat (wie Ethnie, Religion, Gesundheit).", 
-        o: ["Die ethnische Herkunft.", "Die religiöse Überzeugung.", "Das private Bankkonto.", "Gesundheitsdaten."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Was ist das Ziel der 'Transparenz' im Datenschutz?", 
-        a: "Es muss erkennbar sein, wer welche Daten wann und wozu verarbeitet.", 
-        e: "Der Betroffene (und die Aufsicht) muss jederzeit nachvollziehen können, was mit den Daten geschieht. Keine 'Black Box'.", 
-        o: ["Daten müssen für jeden öffentlich einsehbar sein.", "Es muss erkennbar sein, wer welche Daten wann und wozu verarbeitet.", "Daten dürfen nur im Klartext gespeichert werden.", "Die Verschlüsselung muss offenlegt werden."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Welche Kategorie umfasst Daten wie 'Name', 'Dienstgrad' und 'dienstliche Erreichbarkeit'?", 
-        a: "Allgemeine personenbezogene Daten (Funktionsträgerdaten).", 
-        e: "Diese Daten sind für die dienstliche Aufgabenerfüllung notwendig und fallen in den niedrigsten Schutzbereich 1.", 
-        o: ["Besondere personenbezogene Daten.", "Allgemeine personenbezogene Daten (Funktionsträgerdaten).", "Verschlusssachen (VS-NfD).", "Private Stammdaten."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Wann liegt ein 'Informationssicherheitsverstoß' vor?", 
-        a: "Wenn angeordnete Sicherheitsmaßnahmen nicht eingehalten wurden.", 
-        e: "Ein Verstoß grenzt sich von der Lücke ab: Hier wurden bestehende Regeln (vorsätzlich oder fahrlässig) missachtet.", 
-        o: ["Wenn eine Festplatte defekt ist.", "Wenn angeordnete Sicherheitsmaßnahmen nicht eingehalten wurden.", "Wenn ein Update installiert wird.", "Wenn eine neue Schwachstelle entdeckt wird, für die es noch keine Regelung gibt."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Worauf bezieht sich der Begriff 'Intervenierbarkeit'?", 
-        a: "Auf das Recht des Betroffenen auf Berichtigung, Löschung oder Sperrung seiner Daten.", 
-        e: "Es sichert dem Bürger die Herrschaft über seine eigenen Daten (Informationelle Selbstbestimmung).", 
-        o: ["Auf die Möglichkeit des Administrators, Passwörter zurückzusetzen.", "Auf das Recht des Vorgesetzten, E-Mails zu lesen.", "Auf das Recht des Betroffenen auf Berichtigung, Löschung oder Sperrung seiner Daten.", "Auf die physische Zerstörung von Datenträgern."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Sind Gesundheitsdaten (z.B. 90/5) 'Allgemeine personenbezogene Daten'?", 
-        a: "Nein, es sind 'Besondere personenbezogene Daten' (BPersDat).", 
-        e: "Gesundheitsdaten genießen einen höheren Schutzstatus als reine Adress- oder Verwaltungsdaten.", 
-        o: ["Ja, sie sind Schutzbereich 1.", "Ja, aber nur für den Truppenarzt.", "Nein, es sind 'Besondere personenbezogene Daten' (BPersDat).", "Nein, sie sind Verschlusssachen."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "In welchem Verhältnis stehen IT-Sicherheit und Informationssicherheit zueinander?", 
-        a: "IT-Sicherheit ist ein Teilaspekt der Informationssicherheit.", 
-        e: "Informationssicherheit ist der Überbegriff (schützt Informationen egal ob auf Papier oder im Kopf), IT-Sicherheit schützt technische Systeme.", 
-        o: ["Sie sind exakt dasselbe.", "Informationssicherheit ist ein Teilaspekt der IT-Sicherheit.", "IT-Sicherheit ist ein Teilaspekt der Informationssicherheit.", "IT-Sicherheit betrifft nur Hardware, Informationssicherheit nur Software."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Was ist eine 'Informationssicherheitslücke'?", 
-        a: "Ein neu entdeckter Schwachpunkt, trotz ordnungsgemäßer Umsetzung aller Regeln.", 
-        e: "Im Gegensatz zum Verstoß hat hier niemand einen Fehler gemacht; das System hat eine technische oder organisatorische Unzulänglichkeit.", 
-        o: ["Ein vorsätzlicher Verstoß gegen Vorschriften.", "Der Verlust eines Laptops.", "Ein neu entdeckter Schwachpunkt, trotz ordnungsgemäßer Umsetzung aller Regeln.", "Das Vergessen des Passworts."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Welche Daten fallen unter das 'allgemeine Persönlichkeitsrecht'?", 
-        a: "Alle personenbezogenen Daten.", 
-        e: "Das Recht auf informationelle Selbstbestimmung (Art. 2 GG) schützt grundsätzlich alle Daten, die einer Person zugeordnet werden können.", 
-        o: ["Nur Gesundheitsdaten.", "Nur Daten von Politikern.", "Alle personenbezogenen Daten.", "Nur finanzielle Daten."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Was ist KEINE Kategorie im Schema der Bw-Datenschutzklassen?", 
-        a: "Schutzbereich 4.", 
-        e: "Das Konzept der Bundeswehr kennt nur die Schutzbereiche 1 (Funktionsträger), 2 (Privates) und 3 (Besonders Sensibles/BPersDat).", 
-        o: ["Schutzbereich 1.", "Schutzbereich 2.", "Schutzbereich 3.", "Schutzbereich 4."], 
-        m: "DATENSCHUTZ" 
-    },
+            <a href="trainer.html" class="card">
+                <span class="card-icon">⚖️</span>
+                <h3>Datenschutz & Recht</h3>
+                <p>DSGVO, Schutzbereiche (1-3), BPersDat und der richtige Umgang mit VS.</p>
+                <span class="badge">THEORIE</span>
+            </a>
 
-    // --- NEUE FRAGEN: SCHUTZBEREICHE & MAßNAHMEN (Gemäß Präsentation) ---
-    { 
-        q: "Welche Daten fallen in den Schutzbereich 1?", 
-        a: "Funktionsträgerdaten (z.B. Name, Dienstgrad, dienstl. Telefon).", 
-        e: "Diese Daten sind für den Dienstbetrieb erforderlich und weniger schutzbedürftig, da sie die offizielle Funktion betreffen.", 
-        o: ["Gesundheitsdaten.", "Private Anschrift und Handynummer.", "Funktionsträgerdaten (z.B. Name, Dienstgrad, dienstl. Telefon).", "Disziplinarakten."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Welche Daten fallen typischerweise in den Schutzbereich 2?", 
-        a: "Private Adressen, Geburtsdatum, Familienstand, Bankverbindung.", 
-        e: "Hierbei handelt es sich um private Informationen, die aber noch keine 'besonderen Daten' nach Art. 9 DSGVO sind.", 
-        o: ["Funktionsträgerdaten.", "Private Adressen, Geburtsdatum, Familienstand, Bankverbindung.", "Gesundheitsdaten.", "Nur öffentliche Informationen."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Welche Daten fallen in den Schutzbereich 3?", 
-        a: "Disziplinarakten, Sicherheitsakten und alle Gesundheitsdaten.", 
-        e: "Hier droht dem Betroffenen der größte Schaden bei Bekanntwerden, daher ist das Schutzniveau am höchsten.", 
-        o: ["Dienstliche Telefonlisten.", "Geburtstagslisten.", "Disziplinarakten, Sicherheitsakten und alle Gesundheitsdaten.", "Organigramme der Abteilung."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Welche Verschlüsselung ist für Daten des Schutzbereichs 2 (z.B. Excel-Liste mit Geburtstagen) mindestens erforderlich?", 
-        a: "7-Zip (AES256) oder MS Office Verschlüsselung (ab 2016).", 
-        e: "Für SB 2 sind gängige, starke Verschlüsselungen wie AES256 in 7-Zip oder modernen Office-Versionen ausreichend.", 
-        o: ["Gar keine, Passwortschutz reicht.", "7-Zip (AES256) oder MS Office Verschlüsselung (ab 2016).", "Zwingend SINA-Box.", "Rot13-Verfahren."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Welche Anforderung gilt für die Speicherung von Schutzbereich 3-Daten (z.B. Gesundheitsakte digital)?", 
-        a: "Zwingende Verschlüsselung mit zugelassenen Mitteln (z.B. GnuPG VS-Desktop, Chiasmus).", 
-        e: "Einfache Passwörter reichen hier nicht. Es müssen vom BSI/Bw zugelassene Krypto-Tools genutzt werden.", 
-        o: ["Speicherung im öffentlichen Ordner.", "Windows-Anmeldepasswort genügt.", "Zwingende Verschlüsselung mit zugelassenen Mitteln (z.B. GnuPG VS-Desktop, Chiasmus).", "Verstecken der Datei in einem Unterordner."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Darf man Daten des Schutzbereichs 3 per E-Mail an einen externen Empfänger senden?", 
-        a: "Grundsätzlich verboten.", 
-        e: "Der Versand von hochsensiblen Daten (z.B. Gesundheitsdaten) über das offene Internet ist aufgrund des Risikos untersagt.", 
-        o: ["Ja, immer.", "Ja, wenn der Empfänger vertrauenswürdig wirkt.", "Grundsätzlich verboten.", "Nur am Wochenende."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Wie müssen Papierunterlagen des Schutzbereichs 1 (z.B. Telefonliste) aufbewahrt werden?", 
-        a: "Keine besonderen Anforderungen (Büroschrank).", 
-        e: "Da es sich um Funktionsträgerdaten handelt, ist keine Tresorlagerung vorgeschrieben. Ein normaler Büroschrank genügt.", 
-        o: ["Im Panzerschrank.", "Im VS-Verwahrgelass.", "Keine besonderen Anforderungen (Büroschrank).", "Sie müssen täglich vernichtet werden."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Ist die Personalnummer (letzte 5 Ziffern der PK) Schutzbereich 1 oder 2?", 
-        a: "Schutzbereich 1 (Sonderstellung).", 
-        e: "Die Personalnummer dient der Identifikation im Dienst und wird meist wie ein Funktionsträgerdatum (SB 1) behandelt.", 
-        o: ["Schutzbereich 1 (Sonderstellung).", "Schutzbereich 2.", "Schutzbereich 3.", "Sie ist öffentlich."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Darf ich Daten des Schutzbereichs 2 (z.B. private Handynummern) unverschlüsselt per E-Mail im Bw-Intranet versenden?", 
-        a: "Nein, Verschlüsselung (z.B. S/MIME, Greenshield) ist erforderlich.", 
-        e: "Auch im Intranet müssen private Daten vor unbefugter Einsicht (z.B. durch Admins) geschützt werden.", 
-        o: ["Ja, das Intranet ist sicher.", "Ja, aber nur an Vorgesetzte.", "Nein, Verschlüsselung (z.B. S/MIME, Greenshield) ist erforderlich.", "Nur wenn es eilt."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Fällt ein Auszug aus dem Zentralregister in den Schutzbereich 2?", 
-        a: "Nein, in Schutzbereich 3.", 
-        e: "Daten aus dem Bundeszentralregister (Vorstrafen etc.) sind hochsensibel und gehören in die höchste Kategorie.", 
-        o: ["Ja, Schutzbereich 2.", "Nein, in Schutzbereich 3.", "Nein, Schutzbereich 1.", "Er ist öffentlich."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Welche Verschlüsselungsmethode wird für Schutzbereich 1 im E-Mail-Verkehr standardmäßig genutzt?", 
-        a: "S/MIME (Greenshield) oder Transportverschlüsselung.", 
-        e: "Für Funktionsträgerdaten genügt die Standardverschlüsselung (Outlook/S/MIME), keine zusätzliche Dateiverschlüsselung nötig.", 
-        o: ["GnuPG VS-Desktop.", "Chiasmus.", "S/MIME (Greenshield) oder Transportverschlüsselung.", "7-Zip mit 256 Bit."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Was ist bei der Übermittlung von Schutzbereich 1-Daten an Externe zu beachten?", 
-        a: "GnuPG-Verschlüsselung wird empfohlen, ist aber nicht zwingend, wenn Transportverschlüsselung vorliegt.", 
-        e: "Da es 'nur' Funktionsträgerdaten sind, ist der Schutzbedarf geringer als bei Privatdaten.", 
-        o: ["Es ist verboten.", "GnuPG-Verschlüsselung ist streng verboten.", "GnuPG-Verschlüsselung wird empfohlen, ist aber nicht zwingend, wenn Transportverschlüsselung vorliegt.", "Es muss per Bote gesendet werden."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Wohin gehören Daten über 'erfolgte Lehrgangsteilnahmen'?", 
-        a: "Schutzbereich 2.", 
-        e: "Diese Daten sind Teil der persönlichen Historie/Akte und privater als reine Name/Dienstgrad-Infos (SB 1).", 
-        o: ["Schutzbereich 1.", "Schutzbereich 2.", "Schutzbereich 3.", "Öffentliche Daten."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Welcher Schutzbereich gilt für 'Sonstige schutzbedürftige Informationen' (z.B. vertrauliche Unternehmensdaten)?", 
-        a: "Sie fallen nicht in das SB 1-3 Schema, müssen aber analog geschützt werden.", 
-        e: "Das Schema SB 1-3 gilt spezifisch für personenbezogene Daten. Industriedaten etc. sind eine eigene Kategorie.", 
-        o: ["Immer Schutzbereich 3.", "Immer Schutzbereich 1.", "Sie fallen nicht in das SB 1-3 Schema, müssen aber analog geschützt werden.", "Sie brauchen keinen Schutz."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Ist 7-Zip eine zulässige Verschlüsselungsmethode für den Schutzbereich 3?", 
-        a: "Ja.", 
-        e: "Gemäß der Übersicht zu Schutzmaßnahmen sind neben Chiasmus/GnuPG auch 7-Zip, PDF-Verschlüsselung und MS Office (AES256) für den Schutzbereich 3 zulässig.", 
-        o: ["Nein, nur Chiasmus ist erlaubt.", "Ja.", "Nein, nur für SB 2.", "Nur in Verbindung mit SINA."], 
-        m: "SCHUTZBEREICHE" 
-    },
-    { 
-        q: "Welche der folgenden Verschlüsselungen ist für den Schutzbereich 3 ZULÄSSIG?", 
-        a: "MS Office ab Version 2016 mit AES256.", 
-        e: "Für SB 3 sind neben PKIBw/GnuPG auch gängige Tools wie MS Office (AES256), 7-Zip und PDF zulässig.", 
-        o: ["Alte MS Office Versionen (vor 2016).", "MS Office ab Version 2016 mit AES256.", "Ein einfaches Windows-Passwort.", "Verschlüsselung ist für SB 3 nicht notwendig."], 
-        m: "SCHUTZBEREICHE" 
-    },
+            <a href="trainer.html" class="card">
+                <span class="card-icon">📡</span>
+                <h3>Abstrahlsicherheit</h3>
+                <p>Zonenmodelle, TEMPEST, MEP-Plaketten und sichere Nutzung mobiler Geräte.</p>
+                <span class="badge">TECHNIK</span>
+            </a>
 
-    // --- ABSTRAHLSICHERHEIT ---
-    { q: "Was ist das Ziel der Abstrahlsicherheit?", a: "Verhinderung der Ausspähung durch kompromittierende elektromagnetische Strahlung.", e: "Schutz vor TEMPEST-Angriffen.", o: ["Schutz vor Blitzeinschlägen", "Verhinderung der Ausspähung durch kompromittierende elektromagnetische Strahlung.", "Kühlung der Server", "Verhinderung von WLAN-Störungen"], m: "ABSTRAHLUNG" },
-    { q: "Welche Zone beschreibt einen Bereich, in dem VS nur bearbeitet werden darf, wenn das Gerät speziell geschirmt ist?", a: "Zone 2 oder 3", e: "Hier ist der Schutzabstand zu gering, daher muss das Gerät selbst sicher sein (SDIP 27 Level A).", o: ["Zone 0", "Zone 1", "Zone 2 oder 3", "Zone X"], m: "ABSTRAHLUNG" },
-    { q: "Was bedeutet 'MEP'?", a: "Mess- und Prüfplakette (für die Abstrahlprüfung).", e: "Kennzeichnet technisch geprüfte Geräte.", o: ["Militärische Einzel-Prüfung", "Mess- und Prüfplakette (für die Abstrahlprüfung).", "Mobile Elektronik-Prävention", "Management-Einstufungs-Protokoll"], m: "ABSTRAHLUNG" },
-    { q: "In welchen Abständen muss eine Wiederholungsmessung für mobile IT-Systeme (MEP) erfolgen?", a: "Spätestens nach 12 Monaten.", e: "Mobile Geräte unterliegen höherem Verschleiß, daher jährliche Prüfung.", o: ["Alle 6 Monate", "Spätestens nach 12 Monaten.", "Alle 24 Monate", "Nur bei Defekt"], m: "ABSTRAHLUNG" },
-    { q: "In welchem Dokument der Bundeswehr ist die Abstrahlsicherheit primär geregelt?", a: "A-960/1", e: "Die zentrale Vorschrift für Abstrahlsicherheit.", o: ["A-960/1", "ZDv 3/12", "IT-Grundschutz", "Bw-Krypto-Handbuch"], m: "ABSTRAHLUNG" },
-    { q: "Was kennzeichnet die 'Zone 1' im Zonenmodell?", a: "Ein Bereich mit kontrolliertem Zugang, aber geringerem Schutzabstand als Zone 0.", e: "Zone 1 erfordert oft Geräte mit SDIP 27 Level B (mittlere Schirmung).", o: ["Öffentlicher Raum", "Höchste Schutzzone im Servergehäuse", "Ein Bereich mit kontrolliertem Zugang, aber geringerem Schutzabstand als Zone 0.", "Ein mobiles Zelt im Einsatz"], m: "ABSTRAHLUNG" },
-    { q: "Welche Farbe hat eine gültige MEP-Plakette?", a: "Rot", e: "Die rote Plakette signalisiert die bestandenene Messung.", o: ["Grün", "Gelb", "Blau", "Rot"], m: "ABSTRAHLUNG" },
-    { q: "Was muss geschehen, wenn ein Gerät mit MEP-Plakette repariert wurde (Gehäuseöffnung)?", a: "Es muss eine neue Kurzvermessung durchgeführt werden.", e: "Das Öffnen des Gehäuses kann die Schirmung beschädigen.", o: ["Nichts", "Es muss weggeworfen werden", "Es muss eine neue Kurzvermessung durchgeführt werden.", "Es muss nur neu gestartet werden"], m: "ABSTRAHLUNG" },
-    { q: "Was beschreibt der Begriff 'Kompromittierende Strahlung'?", a: "Ungewollte elektromagnetische Emissionen, die den Informationsgehalt verraten.", e: "Das Signal 'leckt' aus dem Kabel oder Monitor in die Luft.", o: ["Radioaktive Strahlung aus Monitoren", "Strahlung, die Hardware zerstört", "Ungewollte elektromagnetische Emissionen, die den Informationsgehalt verraten.", "WLAN-Signale, die das Internet verlangsamen"], m: "ABSTRAHLUNG" },
-
-    // --- KRYPTOSICHERHEIT ---
-    
-   
-    { q: "Wer darf die Vernichtung von Kryptomitteln durchführen?", a: "Der Kryptoverwalter in Anwesenheit eines Zeugen.", e: "Vier-Augen-Prinzip ist Pflicht. Vernichtung muss protokolliert werden.", o: ["Jeder Soldat", "Nur der IT-Offizier", "Der Kryptoverwalter in Anwesenheit eines Zeugen.", "Nur externes Fachpersonal"], m: "KRYPTO" },
-    { q: "Welches Papier-Vernichtungsverfahren ist bei Kryptomitteln NICHT zulässig?", a: "Einfacher Streifenschnitt breiter als 1mm.", e: "Streifen sind zu leicht rekonstruierbar. Es braucht Partikel-/Kreuzschnitt.", o: ["Verbrennen", "Verflüssigen", "Einfacher Streifenschnitt breiter als 1mm.", "Kreuzschnitt (Partikelgröße max. 0,5x1,5mm)"], m: "KRYPTO" },
-    { q: "In welcher Situation ist eine 'Notvernichtung' einzuleiten?", a: "Bei unmittelbar drohendem Zugriff durch Unbefugte oder den Feind.", e: "Emergency Destruction: Bevor der Feind den Schlüssel kriegt, wird er zerstört.", o: ["Wenn der Schrank voll ist", "Bei unmittelbar drohendem Zugriff durch Unbefugte oder den Feind.", "Wenn das Haltbarkeitsdatum abgelaufen ist", "Bei einem normalen Software-Update"], m: "KRYPTO" },
-    { q: "Wie müssen Sonderkurier und Kurierbegleiter im Flugzeug sitzen?", a: "Sie müssen zusammen sitzen und dürfen nicht vom Kuriergepäck getrennt werden.", e: "Keine Trennung von Kurier und Material. Niemals im Frachtraum aufgeben.", o: ["Getrennt voneinander (Sicherheit)", "In verschiedenen Klassen", "Sie müssen zusammen sitzen und dürfen nicht vom Kuriergepäck getrennt werden.", "Einer sitzt beim Gepäck im Frachtraum"], m: "KRYPTO" },
-    { q: "Welches kryptographische Verfahren gilt heute als unsicher (geknackt)?", a: "DES", e: "56 Bit Schlüssellänge sind zu kurz für moderne Rechner.", o: ["AES", "DES", "RSA", "ECC"], m: "KRYPTO" },
-    { q: "Was ist das Hauptmerkmal einer 'Stromchiffre'?", a: "Die Nachricht wird bitweise oder zeichenweise verschlüsselt.", e: "XOR-Verknüpfung eines endlosen Schlüsselstroms mit den Daten (z.B. im Funk).", o: ["Die Verschlüsselung benötigt viel Strom", "Die Nachricht wird in großen Blöcken (z.B. 128 Bit) verschlüsselt", "Die Nachricht wird bitweise oder zeichenweise verschlüsselt.", "Die Verschlüsselung funktioniert nur online"], m: "KRYPTO" },
-    { q: "Wer ist für die Einweisung der Kryptobediener (KryB) zuständig?", a: "Der Kryptoverwalter oder der Kryptobeauftragte.", e: "Nur befugtes Personal darf Bediener einweisen.", o: ["Der Kompaniechef", "Der Kryptoverwalter oder der Kryptobeauftragte.", "Das BSI", "Der ISB"], m: "KRYPTO" },
-    { q: "Was ist die Hauptaufgabe eines Kryptobeauftragten (KryB)?", a: "Überwachung der Einhaltung von Krypto-Vorschriften in der Einheit.", e: "Der KryB unterstützt den KryVw vor Ort in der Einheit.", o: ["Reparatur von Krypto-Geräten", "Überwachung der Einhaltung von Krypto-Vorschriften in der Einheit.", "Herstellung von eigenen Schlüsseln", "Transport von Material als Kurier"], m: "KRYPTO" },
-    { q: "Wie viele Personen müssen beim Transport von Kryptovariablen (Schlüsseln) anwesend sein?", a: "Zwei (Sonderkurier und Kurierbegleiter).", e: "Immer Vier-Augen-Prinzip beim Transport von Schlüsseln.", o: ["Eine Person reicht", "Zwei (Sonderkurier und Kurierbegleiter).", "Drei Personen", "Immer ein ganzer Zug"], m: "KRYPTO" },
-    { q: "Welches Verfahren nutzt RSA primär?", a: "Asymmetrische Verschlüsselung (Primfaktorzerlegung).", e: "Basiert auf der Schwierigkeit, Produkte großer Primzahlen zu faktorisieren.", o: ["Symmetrische Verschlüsselung", "Asymmetrische Verschlüsselung (Primfaktorzerlegung).", "Hashing", "Stromchiffrierung"], m: "KRYPTO" },
-    { q: "Welche Behörde ist in Deutschland für die Zulassung von IT-Sicherheitsprodukten für VS zuständig?", a: "BSI (Bundesamt für Sicherheit in der Informationstechnik).", e: "Das BSI erteilt die Zulassung für VS-Produkte.", o: ["BMVg", "BSI (Bundesamt für Sicherheit in der Informationstechnik).", "MAD", "BND"], m: "KRYPTO" },
-    { q: "Was bedeutet 'Offline-Kryptierung'?", a: "Verschlüsselung der Daten vor der Übertragung (nicht im Stream).", e: "Datei wird erst verschlüsselt, dann versendet (End-to-End auf Dateiebene).", o: ["Verschlüsselung ohne Strom", "Verschlüsselung der Daten vor der Übertragung (nicht im Stream).", "Verschlüsselung in einem Funkgerät", "Löschen von Daten"], m: "KRYPTO" },
-    { q: "Ist die Steganographie ein Teilbereich der Kryptographie?", a: "Falsch", e: "Kryptographie = Inhalt unlesbar machen. Steganographie = Existenz der Nachricht verbergen.", o: ["Richtig", "Falsch", "Nur bei digitaler Steganographie", "Nur im Bereich VS-GEHEIM"], m: "KRYPTO" },
-    { q: "Welchen Schlüssel nutzt Teilnehmer A bei der asymmetrischen Verschlüsselung, um Teilnehmer B eine vertrauliche Nachricht zu senden?", a: "Den öffentlichen Schlüssel von B", e: "Öffentlicher Schlüssel zum Verschlüsseln, Privater zum Entschlüsseln.", o: ["Den eigenen privaten Schlüssel", "Den eigenen öffentlichen Schlüssel", "Den privaten Schlüssel von B", "Den öffentlichen Schlüssel von B"], m: "KRYPTO" },
-    { q: "Aussage: Symmetrische Verschlüsselungsmechanismen (z. B. DES) sind grundsätzlich sicherer als asymmetrische Verschlüsselungen.", a: "Falsch", e: "Nicht sicherer, aber meist performanter (schneller). Sicherheit hängt von der Schlüssellänge ab.", o: ["Wahr", "Falsch", "Nur bei großen Dateien wahr", "Gilt nur für das NATO-Netz"], m: "KRYPTO" },
-    { q: "Worauf basiert die Sicherheit moderner asymmetrischer Kryptoverfahren?", a: "Auf der Geheimhaltung des privaten Schlüssels (Verfahren ist bekannt).", e: "Kerckhoffs’ Prinzip: Nur der Schlüssel muss geheim sein, nicht der Algorithmus.", o: ["Auf der Geheimhaltung des Verschlüsselungsverfahrens.", "Auf der Länge der Nachricht.", "Auf der Geheimhaltung des privaten Schlüssels (Verfahren ist bekannt).", "Auf der Geschwindigkeit der Hardware."], m: "KRYPTO" },
-    { q: "Womit beschäftigt sich die Kryptoanalyse primär?", a: "Dem Brechen von Kryptographieverfahren ohne Kenntnis des Schlüssels.", e: "Suche nach mathematischen Schwachstellen im Code.", o: ["Dem Erstellen neuer Codes.", "Dem Brechen von Kryptographieverfahren ohne Kenntnis des Schlüssels.", "Der physischen Vernichtung von Krypto-Geräten.", "Der Verwaltung von Passwörtern."], m: "KRYPTO" },
-    { q: "Wie viele Nationale Verteilungsorganisationen (NDA) gibt es für Kryptomaterial in Deutschland?", a: "Genau eine (Zentralisierung).", e: "Nur eine nationale Stelle (Rheinbach), darunter regionale ATZs.", o: ["Eine pro Teilstreitkraft.", "Genau eine (Zentralisierung).", "Vier (analog zu den ATZ).", "Sechzehn (eine pro Bundesland)."], m: "KRYPTO" },
-    { q: "Wer trägt die Gesamtverantwortung für das Kryptomaterial innerhalb einer Dienststelle?", a: "Der Dienststellenleiter (DStL).", e: "Der Leiter haftet immer.", o: ["Der Kryptoverwalter (KryVw).", "Der Dienststellenleiter (DStL).", "Der S6-Offizier.", "Der Kryptobeauftragte (KryB)."], m: "KRYPTO" },
-    { q: "Aussage: Die Bundeswehr nutzt für die operative Übertragung von Daten überwiegend asymmetrische Verschlüsselung.", a: "Falsch (überwiegend symmetrisch wegen Performance/Sicherheit).", e: "Symmetrisch ist schneller für Massendaten (Funk, WAN).", o: ["Wahr", "Falsch (überwiegend symmetrisch wegen Performance/Sicherheit).", "Wahr, aber nur im Einsatzland.", "Wahr, außer bei Funkgeräten."], m: "KRYPTO" },
-    { q: "In welche Kategorie der Kryptomittel fällt eine SmartCard?", a: "Kryptounterlagen", e: "Wird wie ein Schlüssel (Papier) verwaltet.", o: ["Kryptogeräte", "Kryptomaterial", "Kryptounterlagen", "IT-Peripherie"], m: "KRYPTO" },
-    { q: "In welche Kategorie fällt ein Kryptodatenträger (z. B. USB-Stick mit Schlüsseln)?", a: "Kryptounterlagen", e: "Auch elektronische Schlüsselträger gelten als Unterlage.", o: ["Kryptogeräte", "Kryptounterlagen", "Hardware-Komponenten", "Kryptomaterial"], m: "KRYPTO" },
-    { q: "Wie wird das Gerät ELCRODAT 4-2 kategorisiert?", a: "Kryptomaterial (Kryptogerät)", e: "Hardware zur Verschlüsselung ist ein Kryptogerät (CCI).", o: ["Kryptounterlage", "Kryptomaterial (Kryptogerät)", "Zubehörteil", "Kryptovariable"], m: "KRYPTO" },
-    { q: "Welcher Grundsatz gilt für Sonderkurier und Kurierbegleiter beim Betreten eines Flugzeugs?", a: "Als letzter einsteigen und als erster aussteigen.", e: "Vermeidung von Gedränge und Trennung.", o: ["Zuerst einsteigen, um das Gepäck zu verstauen.", "Als letzter einsteigen und als erster aussteigen.", "Immer mit den Piloten einsteigen.", "Zusammen mit der Priority-Gruppe einsteigen."], m: "KRYPTO" },
-    { q: "Darf das Kuriergepäck im Flugzeug von den Kurieren getrennt werden (z. B. im Frachtraum)?", a: "Nein, es muss unter ständiger Aufsicht bleiben.", e: "Ständige Aufsicht ist Pflicht.", o: ["Ja, wenn es ein versiegelter Container ist.", "Ja, bei Flügen über 4 Stunden.", "Nein, es muss unter ständiger Aufsicht bleiben.", "Nur wenn der Kapitän es anordnet."], m: "KRYPTO" }
-];
-
-/* --- LOGIC --- */
-let activeSet = [];
-let retryStack = [];
-let currentIndex = 0;
-let streak = 0;
-let isExam = false;
-let examAnswers = {};
-
-function shuffle(arr) {
-    for(let i=arr.length-1; i>0; i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-}
-
-function initTrainer(filter) {
-    isExam = false;
-    document.getElementById('start-screen').classList.add('hidden');
-    document.getElementById('trainer-screen').classList.remove('hidden');
-    
-    if(filter === 'ALL') activeSet = [...BANK];
-    else activeSet = BANK.filter(x => x.m === filter);
-    shuffle(activeSet);
-    currentIndex = 0;
-    streak = 0;
-    retryStack = [];
-    updateStreak();
-    loadCard();
-}
-
-function loadCard() {
-    // Button immer erst ausblenden
-    const nextBtn = document.getElementById('next-btn');
-    nextBtn.style.display = 'none';
-
-    if(currentIndex >= activeSet.length) {
-        if(retryStack.length > 0) {
-            alert(`Runde beendet. ${retryStack.length} Fehler wiederholen!`);
-            activeSet = [...retryStack];
-            retryStack = [];
-            currentIndex = 0;
-            shuffle(activeSet);
-        } else {
-            alert("Training abgeschlossen!");
-            location.reload();
-            return;
-        }
-    }
-    const item = activeSet[currentIndex];
-    document.getElementById('t-mod').innerText = item.m;
-    document.getElementById('t-idx').innerText = `${currentIndex+1} / ${activeSet.length}`;
-    document.getElementById('t-question').innerText = item.q;
-    document.getElementById('t-retry-badge').classList.toggle('hidden', retryStack.includes(item));
-    document.getElementById('t-progress').style.width = `${(currentIndex/activeSet.length)*100}%`;
-    const c = document.getElementById('t-options');
-    c.innerHTML = '';
-    document.getElementById('t-expl').style.display = 'none';
-    
-    let opts = item.o.map(o => ({ txt:o, isCorrect: o===item.a }));
-    shuffle(opts);
-    
-    opts.forEach((o, i) => {
-        const btn = document.createElement('div');
-        btn.className = 'opt-btn';
-        btn.innerHTML = `<div class="opt-key">${i+1}</div> <div>${o.txt}</div>`;
-        btn.onclick = () => checkTrainerAnswer(btn, o.isCorrect, item);
-        c.appendChild(btn);
-    });
-}
-
-function checkTrainerAnswer(btn, isCorrect, item) {
-    if(btn.parentElement.classList.contains('locked')) return;
-    btn.parentElement.classList.add('locked');
-    const explBox = document.getElementById('t-expl');
-    explBox.style.display = 'block';
-    explBox.className = 'expl-box ' + (isCorrect ? 'is-correct' : 'is-wrong');
-    document.getElementById('t-expl-title').innerText = isCorrect ? "✓ Richtig!" : "✗ Leider falsch.";
-    document.getElementById('t-expl-text').innerText = item.e;
-    
-    // Vibration
-    if(navigator.vibrate) {
-        if(!isCorrect) navigator.vibrate(200); 
-        else navigator.vibrate(50);
-    }
-
-    if(isCorrect) {
-        btn.classList.add('correct');
-        streak++;
-    } else {
-        btn.classList.add('wrong');
-        streak = 0;
-        retryStack.push(item);
-        Array.from(document.querySelectorAll('.opt-btn')).forEach(b => {
-            if(b.innerText.includes(item.a)) b.classList.add('correct');
-        });
-    }
-    updateStreak();
-    
-    // Button anzeigen & hinscrollen
-    const nextBtn = document.getElementById('next-btn');
-    nextBtn.style.display = 'block';
-    nextBtn.scrollIntoView({behavior: "smooth", block: "center"});
-}
-
-function nextCard() {
-    const opts = document.getElementById('t-options');
-    if(!opts.classList.contains('locked')) return;
-    currentIndex++;
-    opts.classList.remove('locked');
-    loadCard();
-}
-
-function updateStreak() {
-    document.getElementById('t-streak').innerText = streak;
-}
-
-function initExam() {
-    isExam = true;
-    document.getElementById('start-screen').classList.add('hidden');
-    document.getElementById('exam-screen').classList.remove('hidden');
-    
-    let pool = [...BANK];
-    shuffle(pool);
-    activeSet = pool.slice(0, 45);
-    examAnswers = {};
-    const container = document.getElementById('exam-list');
-    container.innerHTML = '';
-    activeSet.forEach((item, idx) => {
-        let opts = [...item.o];
-        shuffle(opts);
-        const div = document.createElement('div');
-        div.className = 'exam-item';
-        div.id = `exam-q-${idx}`;
-        div.innerHTML = `
-            <div class="q-meta">Frage ${idx+1}</div>
-            <div class="exam-q">${item.q}</div>
-            ${opts.map(o => `
-                <label class="exam-opt">
-                    <input type="radio" name="q${idx}" value="${o}" onchange="examAnswers[${idx}]='${o}'">
-                    <span>${o}</span>
-                </label>
-            `).join('')}
-            <div class="exam-expl">
-                <strong>Lösung:</strong> ${item.a}<br>
-                <div style="margin-top:5px; padding-left:10px; border-left:2px solid var(--accent);">${item.e}</div>
-            </div>
-        `;
-        container.appendChild(div);
-    });
-}
-
-function submitExam() {
-    if(Object.keys(examAnswers).length < activeSet.length) {
-        if(!confirm(`Erst ${Object.keys(examAnswers).length} von ${activeSet.length} Fragen beantwortet. Abgeben?`)) return;
-    }
-    let score = 0;
-    activeSet.forEach((item, idx) => {
-        const userAns = examAnswers[idx];
-        const div = document.getElementById(`exam-q-${idx}`);
-        div.querySelectorAll('input').forEach(inp => inp.disabled = true);
-        if(userAns === item.a) {
-            score++;
-            div.classList.add('graded-correct');
-        } else {
-            div.classList.add('graded-wrong');
-        }
-    });
-    const perc = Math.round((score/activeSet.length)*100);
-    const header = document.getElementById('exam-result-header');
-    header.innerHTML = `
-        <div class="exam-score-box">
-            <div style="font-size:3rem; font-weight:800; color:${perc>=65?'var(--success)':'var(--error)'}">${perc}%</div>
-            <div style="font-size:1.2rem; margin-bottom:10px;">${score} / ${activeSet.length} Punkte</div>
-            <div style="font-weight:bold; color:var(--muted)">${perc>=65?'Bestanden':'Nicht bestanden'}</div>
+            <a href="trainer.html" class="card">
+                <span class="card-icon">👾</span>
+                <h3>Bedrohungen & APT</h3>
+                <p>Cyber Kill Chain, MITRE ATT&CK, Phishing und Social Engineering erkennen.</p>
+                <span class="badge">RED TEAM</span>
+            </a>
         </div>
-    `;
-    header.classList.remove('hidden');
-    document.getElementById('btn-submit-exam').style.display = 'none';
-    window.scrollTo(0,0);
-}
+    </section>
 
-document.addEventListener('keydown', (e) => {
-    if(isExam || document.getElementById('trainer-screen').classList.contains('hidden')) return;
-    if(['1','2','3','4'].includes(e.key)) {
-        const idx = parseInt(e.key)-1;
-        const btns = document.querySelectorAll('.opt-btn');
-        if(btns[idx]) btns[idx].click();
-    }
-    if(e.code === 'Space') {
-        e.preventDefault();
-        nextCard();
-    }
-});
+    <footer>
+        <p>© 2026 CyberOffz Lernplattform. <br>Entwickelt für effiziente Ausbildung.</p>
+    </footer>
 
-const modules = [...new Set(BANK.map(x=>x.m))];
-const modContainer = document.getElementById('module-list');
-modules.forEach(m => {
-    const btn = document.createElement('div');
-    btn.className = 'mode-card';
-    btn.style.padding = '10px 15px';
-    btn.style.marginBottom = '0';
-    btn.innerHTML = `<span style="font-weight:bold; font-size:0.9rem;">${m}</span>`;
-    btn.onclick = () => initTrainer(m);
-    modContainer.appendChild(btn);
-});
-</script>
 </body>
 </html>
-
-
-
