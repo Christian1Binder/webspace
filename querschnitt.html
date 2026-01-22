@@ -5,32 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0f172a">
-<title>CyberOffz: Allg. Querschnitt Fernmelde</title>
-
+<title>CyberOffz: Allg. Querschnitt</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
-
 <style>
-:root {
-  --bg: #0f172a; --panel: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
-  --accent: #3b82f6; --success: #22c55e; --error: #ef4444; --border: rgba(255,255,255,0.1);
-  --warning: #f59e0b;
-}
+:root { --bg: #0f172a; --panel: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --accent: #3b82f6; --success: #22c55e; --error: #ef4444; --border: rgba(255,255,255,0.1); --warning: #f59e0b; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
-
+body { margin:0; font-family:-apple-system, system-ui, sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
 .wrap { width:100%; max-width:850px; margin:0 auto; padding:20px; padding-bottom:100px; flex:1; display:flex; flex-direction:column; position:relative; }
 .scroll-wrap { overflow-y:auto; flex:1; -webkit-overflow-scrolling: touch; }
 .hidden { display:none !important; }
-
 .btn { border:none; padding:16px 24px; border-radius:12px; font-weight:bold; cursor:pointer; font-size:1.1rem; color:white; transition:0.2s; display:inline-flex; align-items:center; justify-content:center; gap:8px; touch-action: manipulation; }
 .btn-primary { background:var(--accent); box-shadow:0 4px 12px rgba(59,130,246,0.3); }
 .btn-outline { background:transparent; border:1px solid var(--border); color:var(--muted); font-size:0.9rem; padding:10px 16px; }
 .btn-block { width:100%; }
-
 #start-screen { text-align:center; }
-.mode-card { background:var(--panel); border:1px solid var(--border); padding:20px; border-radius:16px; margin-bottom:15px; text-align:left; cursor:pointer; transition:0.2s; display:flex; justify-content:space-between; align-items:center; }
+.mode-card { background:var(--panel); border:1px solid var(--border); padding:12px 16px; border-radius:16px; margin-bottom:15px; text-align:left; cursor:pointer; transition:0.2s; display:flex; justify-content:space-between; align-items:center; }
+.mode-card:active { background:rgba(255,255,255,0.05); }
 .tag { font-size:0.75rem; padding:4px 8px; border-radius:6px; background:rgba(255,255,255,0.1); font-weight:bold; }
-
 .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; font-size:0.9rem; color:var(--muted); }
 .streak-box { color:var(--accent); font-weight:bold; font-size:1.1rem; }
 .progress-track { height:8px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; margin-bottom:20px; }
@@ -42,15 +33,12 @@ body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
 .opt-btn { background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:18px; border-radius:12px; color:var(--text); text-align:left; cursor:pointer; transition:0.1s; display:flex; align-items:center; min-height:60px; }
 .opt-btn.correct { background:rgba(34,197,94,0.15); border-color:var(--success); color:var(--success); }
 .opt-btn.wrong { background:rgba(239,68,68,0.15); border-color:var(--error); color:var(--error); opacity:0.6; }
-
 .expl-box { padding:15px; border-radius:12px; display:none; animation:fadeIn 0.3s; font-size:0.95rem; line-height:1.5; border-left:4px solid transparent; background:rgba(0,0,0,0.2); }
 .expl-box.is-correct { border-left-color:var(--success); }
 .expl-box.is-wrong { border-left-color:var(--error); }
-
 .exam-item { background:var(--panel); padding:20px; border-radius:12px; border:1px solid var(--border); margin-bottom:15px; }
 .exam-q { font-size:1.1rem; font-weight:600; margin-bottom:15px; }
 .exam-opt { display:flex; align-items:start; gap:15px; padding:12px; cursor:pointer; border-radius:8px; }
-
 @keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 </style>
 </head>
@@ -60,20 +48,14 @@ body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
     <div style="margin:40px 0; text-align:center;">
         <div style="font-size:3rem; margin-bottom:10px;">🌍</div>
         <h1>Allgemeiner Querschnitt</h1>
-        <p style="color:var(--muted)">Schwerpunkt: Fernmeldewesen & Führungsmittel</p>
+        <p style="color:var(--muted)">Schwerpunkt: Fernmelde, Arbeitsschutz, Umwelt & Mat</p>
     </div>
     <div class="mode-card" onclick="initTrainer('ALL')">
-        <div>
-            <h3>🚀 Speed-Trainer</h3>
-            <div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Alle Fm-Fragen • Sofort-Feedback</div>
-        </div>
+        <div><h3>🚀 Speed-Trainer</h3><div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Alle Fragen • Sofort-Feedback</div></div>
         <div class="tag" style="background:var(--accent)">LERNEN</div>
     </div>
     <div class="mode-card" onclick="initExam()">
-        <div>
-            <h3>📝 Prüfungssimulation</h3>
-            <div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">45 Fragen Mix • Status Quo ermitteln</div>
-        </div>
+        <div><h3>📝 Prüfungssimulation</h3><div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">45 Fragen Mix • Status Quo</div></div>
         <div class="tag" style="background:var(--warning); color:#000;">TEST</div>
     </div>
     <h3 style="margin-top:30px; border-bottom:1px solid var(--border); padding-bottom:10px;">Themen-Filter</h3>
@@ -109,205 +91,41 @@ body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
 </div>
 
 <script>
-/* --- DATENBANK: FERNMELDEMITTEL & QUERSCHNITT --- */
 const BANK = [
-    { 
-        q: "Welchen Frequenzbereich nutzt das VHF-Funkgerät SEM 80/90 primär?", 
-        a: "30,000 bis 79,975 MHz", 
-        e: "Das SEM 80/90 arbeitet im UKW-Bereich (VHF) mit einem Kanalabstand von 25 kHz.", 
-        o: ["1,5 bis 30 MHz", "30,000 bis 79,975 MHz", "225 bis 400 MHz", "400 bis 470 MHz"], 
-        m: "FUNKGERÄTE" 
-    },
-    { 
-        q: "Was beschreibt der Begriff 'Hüpfen' (Frequency Hopping) im Fernmeldebetrieb?", 
-        a: "Ein schnelles Wechseln der Frequenzen zum Schutz gegen elektronische Aufklärung.", 
-        e: "Frequency Hopping erschwert das Mitlesen und Stören des Funkverkehrs durch den Gegner.", 
-        o: ["Das Springen von einem Funkkreis in den nächsten.", "Ein schnelles Wechseln der Frequenzen zum Schutz gegen elektronische Aufklärung.", "Die Nutzung von Relaisstationen.", "Das Verstärken der Sendeleistung."], 
-        m: "ÜBERTRAGUNG" 
-    },
-    { 
-        q: "Wofür steht die Abkürzung 'HRM' im Zusammenhang mit Kurzwellenfunk?", 
-        a: "High Frequency Radio Modem", 
-        e: "Das HRM ermöglicht die digitale Datenübertragung über weite Distanzen im HF-Bereich (Kurzwelle).", 
-        o: ["High Range Messenger", "High Frequency Radio Modem", "Heeres-Radio-Modul", "Hybrid-Relais-Management"], 
-        m: "FUNKGERÄTE" 
-    },
-    { 
-        q: "Welches System dient der Bündelfunk-Kommunikation für ortsfeste und verlegbare Nutzungen der Bw in Deutschland?", 
-        a: "Tetrapol (Bw-Bündelfunk)", 
-        e: "Tetrapol wird vor allem für die Kommunikation im Inland und im Rahmen der Objektsicherung genutzt.", 
-        o: ["WLAN-Bw", "Tetrapol (Bw-Bündelfunk)", "SatComBw", "GSM-R"], 
-        m: "SYSTEME" 
-    },
-    { 
-        q: "Welche Komponente ist im System 'SatComBw' für die Bodenstation zuständig?", 
-        a: "Die Ankerstation.", 
-        e: "Ankerstationen bilden die Schnittstelle zwischen dem Weltraumsegment und den terrestrischen Netzen der Bw.", 
-        o: ["Die Ankerstation.", "Das Funkgerät SEM 52.", "Der Feldkabelanschluss.", "Die WLAN-Antenne."], 
-        m: "SYSTEME" 
-    },
-    { 
-        q: "Was ist die Hauptaufgabe eines 'Relais' im Funkverkehr?", 
-        a: "Die Erhöhung der Reichweite durch Empfang und gleichzeitige Wiederausstrahlung.", 
-        e: "Ein Relais wird meist auf Anhöhen positioniert, um topografische Hindernisse zu überwinden.", 
-        o: ["Das Verschlüsseln von Nachrichten.", "Die Erhöhung der Reichweite durch Empfang und gleichzeitige Wiederausstrahlung.", "Das Unterdrücken von Rauschen.", "Die Verwaltung von IP-Adressen."], 
-        m: "ÜBERTRAGUNG" 
-    },
-    { 
-        q: "In welchem Dokument sind die geltenden Sprechtafeln und Funkrufnamen festgelegt?", 
-        a: "Besondere Anweisungen für das Fernmeldewesen (BesAnFm).", 
-        e: "Die BesAnFm regeln die spezifischen Details der Kommunikation für eine Übung oder einen Einsatz.", 
-        o: ["ZDv 3/12.", "Taschenkarte Recht.", "Besondere Anweisungen für das Fernmeldewesen (BesAnFm).", "Schießbuch."], 
-        m: "ORGANISATION" 
-    },
-    { 
-        q: "Wo sind für die Bundeswehr Abweichungen von Vorgaben des Arbeitsschutzgesetzes geregelt?", 
-        a: "BMVg ArbSchGAnwV", 
-        e: "Die Verordnung über die Anwendung des Arbeitsschutzgesetzes im Geschäftsbereich des BMVg regelt spezifische Ausnahmen für die Streitkräfte.", 
-        o: ["Soldatengesetz", "BMVg ArbSchGAnwV", "Strafgesetzbuch", "Grundgesetz"], 
-        m: "ARBEITSSCHUTZ" 
-    },
-    { 
-        q: "Wie lautet das Ziel von Arbeitsschutz?", 
-        a: "Gefährdungen ausschließen, um die Sicherheit im Dienst zu gewährleisten", 
-        e: "Prävention steht im Vordergrund, um Unfälle und Gesundheitsschäden vorab zu vermeiden.", 
-        o: ["Kostenersparnis bei der Ausrüstung", "Vermeidung von Schreibarbeit", "Gefährdungen ausschließen, um die Sicherheit im Dienst zu gewährleisten", "Einhaltung der Ruhezeiten"], 
-        m: "ARBEITSSCHUTZ" 
-    },
-    { 
-        q: "Was ist der Unterschied zwischen einer Unfallanzeige und einem Vermerk?", 
-        a: "Anzeige = Krankheitsbedingte Abwesenheit", 
-        e: "Eine Unfallanzeige ist zwingend erforderlich, wenn der Dienstunfall zu einer Arbeitsunfähigkeit führt.", 
-        o: ["Es gibt keinen Unterschied", "Anzeige = Krankheitsbedingte Abwesenheit", "Vermerk ist nur für Zivilisten", "Anzeige erfolgt nur bei Sachschaden"], 
-        m: "ARBEITSSCHUTZ" 
-    },
-    { 
-        q: "Wer darf während des Dienstes einen Zeckenbiss entfernen?", 
-        a: "SanPers während des Dienstes, außerhalb sie selbst", 
-        e: "Im Dienst ist medizinisches Fachpersonal (SanPers) aufzusuchen; privat ist Eigenhilfe zulässig.", 
-        o: ["Nur der Disziplinarvorgesetzte", "Jeder Kamerad mit einem Taschenmesser", "SanPers während des Dienstes, außerhalb sie selbst", "Ausschließlich ein ziviler Notarzt"], 
-        m: "ARBEITSSCHUTZ" 
-    },
-    { 
-        q: "Wann besteht bei einem Wegeunfall KEIN Versicherungsschutz?", 
-        a: "Semmel kaufen auf direktem Weg", 
-        e: "Private Unterbrechungen (wie Einkaufen), die nicht unmittelbar mit dem Weg zur/von der Dienststelle zusammenhängen, heben den Schutz auf.", 
-        o: ["Semmel kaufen auf direktem Weg", "Direkter Weg von der Wohnung", "Fahrt mit einer Fahrgemeinschaft", "Umweg wegen einer Baustelle"], 
-        m: "ARBEITSSCHUTZ" 
-    },
-    { 
-        q: "Welche Nutzungsbedingungen gelten für elektr. Kleingeräte innerhalb mil. Liegenschaften?", 
-        a: "Namentliche Zuordnung, CE-Zeichen, max. 1500 Watt", 
-        e: "Private Geräte müssen geprüft sein, eine CE-Kennzeichnung besitzen und dürfen die Lastgrenze nicht überschreiten.", 
-        o: ["Nur Geräte von Markenherstellern", "Namentliche Zuordnung, CE-Zeichen, max. 1500 Watt", "Keine Einschränkungen", "Nur batteriebetriebene Geräte"], 
-        m: "ARBEITSSCHUTZ" 
-    },
-    { 
-        q: "Was bedeutet der Schallwert 100.000?", 
-        a: "Lärmbelastungskonto, was nicht leer werden darf", 
-        e: "Dies beschreibt ein Kontingent für Lärmexposition, um Gehörschäden bei Soldaten vorzubeugen.", 
-        o: ["Maximale Lautstärke in Dezibel", "Lärmbelastungskonto, was nicht leer werden darf", "Anzahl der Schuss pro Jahr", "Frequenzbereich des Funkgeräts"], 
-        m: "ARBEITSSCHUTZ" 
-    },
-
-    // --- UMWELT ---
-    { 
-        q: "Dürfen Übungen in Wasserschutzgebieten abgehalten werden?", 
-        a: "Ja, aber nicht in Schutzzone I + II", 
-        e: "Wasserschutzgebiete haben verschiedene Zonen; I und II sind aufgrund der Trinkwassergefahr für Übungen gesperrt.", 
-        o: ["Ja, uneingeschränkt", "Nein, niemals", "Ja, aber nicht in Schutzzone I + II", "Nur nach Genehmigung durch das Umweltbundesamt"], 
-        m: "UMWELT" 
-    },
-    { 
-        q: "Wo dürfen Übungen abgehalten werden?", 
-        a: "Staatsforst", 
-        e: "Im Gegensatz zu Nationalparks oder Wohngebieten ist der Staatsforst (unter Auflagen) für militärische Übungen nutzbar.", 
-        o: ["Nationalpark", "Staatsforst", "Wohngebiet", "Naturschutzgebiet"], 
-        m: "UMWELT" 
-    },
-    { 
-        q: "Worauf deutet ein weiß markierter Deckel bei einem Kanister hin?", 
-        a: "Wasser", 
-        e: "Die weiße Kennzeichnung dient der eindeutigen Unterscheidung von Trinkwasserbehältern zu Kraftstoffkanistern.", 
-        o: ["Benzin", "Diesel", "Wasser", "Altöl"], 
-        m: "UMWELT" 
-    },
-
-    // --- MATERIELLERHALT / ÜBERGABE ---
-    { 
-        q: "Wie lange ist eine Übergabeverhandlung aufzubewahren?", 
-        a: "Bis die TE erneut übergeben wird", 
-        e: "Die Dokumentation muss bis zur nächsten formellen Verantwortungsänderung nachvollziehbar bleiben.", 
-        o: ["2 Jahre", "10 Jahre", "Bis die TE erneut übergeben wird", "Nur 6 Monate"], 
-        m: "MAT-ERHALT" 
-    },
-    { 
-        q: "Wie lange ist eine Materialausgabekarte (MAK) maximal gültig?", 
-        a: "4 Wochen", 
-        e: "Nach 4 Wochen muss die MAK in der Regel abgerechnet oder erneuert werden.", 
-        o: ["1 Woche", "4 Wochen", "6 Monate", "1 Jahr"], 
-        m: "MAT-ERHALT" 
-    },
-    { 
-        q: "Was beschreibt Einsatzfähigkeit?", 
-        a: "Erfüllung Soll-Zustands", 
-        e: "Einsatzfähigkeit ist gegeben, wenn Personal und Material den festgelegten Soll-Vorgaben entsprechen.", 
-        o: ["Dass alle Soldaten wach sind", "Erfüllung Soll-Zustands", "Nur der technische Zustand von Panzern", "Die Anwesenheit beim Appell"], 
-        m: "MAT-ERHALT" 
-    },
-    { 
-        q: "Ab wann ist eine Übergabeverhandlung durchzuführen?", 
-        a: "DP-Wechsel ab TE-Führer", 
-        e: "Bei einem Wechsel der personellen Verantwortung auf Ebene der Teileinheitsführung ist eine formale Übergabe Pflicht.", 
-        o: ["Bei jedem Urlaub", "DP-Wechsel ab TE-Führer", "Nur bei Beförderungen", "Täglich beim Dienstantritt"], 
-        m: "MAT-ERHALT" 
-    },
-    { 
-        q: "Wer bestimmt den Umfang der Übergabe?", 
-        a: "Übernehmender", 
-        e: "Derjenige, der die Verantwortung übernimmt, legt fest, wie detailliert die Prüfung des Materials erfolgen muss.", 
-        o: ["Abgebender", "Übernehmender", "Der Spieß", "Das Logistikzentrum"], 
-        m: "MAT-ERHALT" 
-    },
-    { 
-        q: "Bei einer Abwesenheit von über wie vielen Wochen ist das Material zu übergeben?", 
-        a: "6 Wochen", 
-        e: "Ab einer voraussichtlichen Abwesenheit von mehr als 6 Wochen muss eine formale Materialübergabe erfolgen.", 
-        o: ["2 Wochen", "4 Wochen", "6 Wochen", "12 Wochen"], 
-        m: "MAT-ERHALT" 
-    }
+    {q:"Frequenzbereich VHF-Funk SEM 80/90?",a:"30,000 bis 79,975 MHz",e:"Arbeitet im UKW-Bereich (VHF) mit 25 kHz Kanalabstand.",o:["1,5 bis 30 MHz","30,000 bis 79,975 MHz","225 bis 400 MHz","400 bis 470 MHz"],m:"FERNMELDE"},
+    {q:"Was beschreibt 'Frequency Hopping'?",a:"Ein schnelles Wechseln der Frequenzen zum Schutz gegen Aufklärung.",e:"Erschwert das Mitlesen und Stören des Funkverkehrs.",o:["Springen von Funkkreisen","Ein schnelles Wechseln der Frequenzen zum Schutz gegen Aufklärung.","Relaisnutzung","Sendeleistungserhöhung"],m:"FERNMELDE"},
+    {q:"Wo sind Abweichungen vom Arbeitsschutzgesetz geregelt?",a:"BMVg ArbSchGAnwV",e:"Regelt spezifische Ausnahmen für die Streitkräfte.",o:["Soldatengesetz","BMVg ArbSchGAnwV","Strafgesetzbuch","Grundgesetz"],m:"ARBEITSSCHUTZ"},
+    {q:"Wie lautet das Ziel von Arbeitsschutz?",a:"Gefährdungen ausschließen, um Sicherheit im Dienst zu gewährleisten",e:"Prävention zur Vermeidung von Unfällen und Gesundheitsschäden.",o:["Kostenersparnis","Gefährdungen ausschließen, um Sicherheit im Dienst zu gewährleisten","Einhaltung der Ruhezeiten","Vermeidung von Schreibarbeit"],m:"ARBEITSSCHUTZ"},
+    {q:"Unterschied Unfallanzeige / Vermerk?",a:"Anzeige = Krankheitsbedingte Abwesenheit",e:"Anzeige ist zwingend bei Dienstunfällen mit Arbeitsunfähigkeit.",o:["Kein Unterschied","Anzeige = Krankheitsbedingte Abwesenheit","Vermerk nur für Zivilisten","Anzeige nur bei Sachschaden"],m:"ARBEITSSCHUTZ"},
+    {q:"Wer entfernt einen Zeckenbiss?",a:"SanPers im Dienst, außerhalb sie selbst",e:"Im Dienst SanPers aufsuchen, privat Eigenhilfe zulässig.",o:["Nur Vorgesetzte","Jeder Kamerad","SanPers im Dienst, außerhalb sie selbst","Nur ziviler Notarzt"],m:"ARBEITSSCHUTZ"},
+    {q:"Wegeunfall: Wann KEIN Versicherungsschutz?",a:"Semmel kaufen auf direktem Weg",e:"Private Unterbrechungen heben den Schutz auf.",o:["Semmel kaufen auf direktem Weg","Direkter Weg von Wohnung","Fahrt mit Fahrgemeinschaft","Umweg wegen Baustelle"],m:"ARBEITSSCHUTZ"},
+    {q:"Was bedeutet der Schallwert 100.000?",a:"Lärmbelastungskonto, was nicht leer werden darf",e:"Kontingent zur Vermeidung von Gehörschäden.",o:["Max. Dezibel","Lärmbelastungskonto, was nicht leer werden darf","Schuss pro Jahr","Funk-Bereich"],m:"ARBEITSSCHUTZ"},
+    {q:"Übungen in Wasserschutzgebieten?",a:"Ja, aber nicht in Schutzzone I + II",e:"Schutzzonen I/II sind wegen Trinkwassergefahr gesperrt.",o:["Ja, uneingeschränkt","Nein, niemals","Ja, aber nicht in Schutzzone I + II","Nur mit Genehmigung"],m:"UMWELT"},
+    {q:"Wo dürfen Übungen abgehalten werden?",a:"Staatsforst",e:"Staatsforst ist unter Auflagen nutzbar.",o:["Nationalpark","Staatsforst","Wohngebiet","Naturschutzgebiet"],m:"UMWELT"},
+    {q:"Weißer Deckel beim Kanister?",a:"Wasser",e:"Weiße Kennzeichnung zur Unterscheidung von Kraftstoff.",o:["Benzin","Diesel","Wasser","Altöl"],m:"UMWELT"},
+    {q:"Aufbewahrung Übergabeverhandlung?",a:"Bis die TE erneut übergeben wird",e:"Muss bis zur nächsten Verantwortungsänderung bleiben.",o:["2 Jahre","10 Jahre","Bis die TE erneut übergeben wird","6 Monate"],m:"MAT-ERHALT"},
+    {q:"Wie lange ist eine MAK maximal gültig?",a:"4 Wochen",e:"Nach 4 Wochen Abrechnung oder Erneuerung nötig.",o:["1 Woche","4 Wochen","6 Monate","1 Jahr"],m:"MAT-ERHALT"},
+    {q:"Was beschreibt Einsatzfähigkeit?",a:"Erfüllung Soll-Zustands",e:"Gleichklang von Personal/Material mit Soll-Vorgaben.",o:["Soldaten wach","Erfüllung Soll-Zustands","Nur Panzerzustand","Anwesenheit Appell"],m:"MAT-ERHALT"},
+    {q:"Ab wann Übergabeverhandlung durchführen?",a:"DP-Wechsel ab TE-Führer",e:"Wechsel der Verantwortung ab TE-Ebene ist formalpflichtig.",o:["Bei jedem Urlaub","DP-Wechsel ab TE-Führer","Nur bei Beförderung","Täglich"],m:"MAT-ERHALT"},
+    {q:"Wer bestimmt Umfang der Übergabe?",a:"Übernehmender",e:"Der Übernehmende bestimmt die Prüftiefe.",o:["Abgebender","Übernehmender","Der Spieß","Logzentrum"],m:"MAT-ERHALT"},
+    {q:"Abwesenheit über x Wochen: Material übergeben?",a:"6 Wochen",e:"Ab 6 Wochen Abwesenheit ist formale Übergabe Pflicht.",o:["2 Wochen","4 Wochen","6 Wochen","12 Wochen"],m:"MAT-ERHALT"}
 ];
 
-/* --- LOGIC (Analog zum System) --- */
 let activeSet = []; let retryStack = []; let currentIndex = 0; let streak = 0; let isExam = false; let examAnswers = {};
 
-function shuffle(arr) {
-    for(let i=arr.length-1; i>0; i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-}
+function shuffle(arr) { for(let i=arr.length-1; i>0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 
 function initTrainer(filter) {
-    isExam = false;
-    document.getElementById('start-screen').classList.add('hidden');
-    document.getElementById('trainer-screen').classList.remove('hidden');
+    isExam = false; document.getElementById('start-screen').classList.add('hidden'); document.getElementById('trainer-screen').classList.remove('hidden');
     activeSet = (filter === 'ALL') ? [...BANK] : BANK.filter(x => x.m === filter);
-    shuffle(activeSet);
-    currentIndex = 0; streak = 0; retryStack = [];
-    updateStreak(); loadCard();
+    shuffle(activeSet); currentIndex = 0; streak = 0; retryStack = []; updateStreak(); loadCard();
 }
 
 function loadCard() {
     document.getElementById('next-btn').style.display = 'none';
     if(currentIndex >= activeSet.length) {
-        if(retryStack.length > 0) {
-            alert(`${retryStack.length} Fehler werden wiederholt.`);
-            activeSet = [...retryStack]; retryStack = []; currentIndex = 0; shuffle(activeSet);
-        } else {
-            alert("Fertig!"); window.location.href='index.html'; return;
-        }
+        if(retryStack.length > 0) { alert(`${retryStack.length} Fehler werden wiederholt.`); activeSet = [...retryStack]; retryStack = []; currentIndex = 0; shuffle(activeSet); } 
+        else { alert("Fertig!"); window.location.href='index.html'; return; }
     }
     const item = activeSet[currentIndex];
     document.getElementById('t-mod').innerText = item.m;
@@ -317,7 +135,6 @@ function loadCard() {
     const c = document.getElementById('t-options');
     c.innerHTML = ''; c.classList.remove('locked');
     document.getElementById('t-expl').style.display = 'none';
-    
     let opts = item.o.map(o => ({ txt:o, isCorrect: o===item.a }));
     shuffle(opts);
     opts.forEach((o, i) => {
@@ -337,28 +154,26 @@ function checkTrainerAnswer(btn, isCorrect, item) {
     ex.className = 'expl-box ' + (isCorrect ? 'is-correct' : 'is-wrong');
     document.getElementById('t-expl-title').innerText = isCorrect ? "✓ Korrekt" : "✗ Falsch";
     document.getElementById('t-expl-text').innerText = item.e;
+    if(navigator.vibrate) navigator.vibrate(isCorrect ? 50 : 200);
     if(isCorrect) { btn.classList.add('correct'); streak++; }
     else { btn.classList.add('wrong'); streak = 0; retryStack.push(item);
            Array.from(document.querySelectorAll('.opt-btn')).forEach(b => { if(b.innerText.includes(item.a)) b.classList.add('correct'); });
     }
     updateStreak();
-    document.getElementById('next-btn').style.display = 'block';
+    const nb = document.getElementById('next-btn'); nb.style.display = 'block';
+    setTimeout(() => { nb.scrollIntoView({behavior: "smooth", block: "center"}); }, 100);
 }
 
 function nextCard() { currentIndex++; loadCard(); }
 function updateStreak() { document.getElementById('t-streak').innerText = streak; }
 
 function initExam() {
-    isExam = true;
-    document.getElementById('start-screen').classList.add('hidden');
-    document.getElementById('exam-screen').classList.remove('hidden');
+    isExam = true; document.getElementById('start-screen').classList.add('hidden'); document.getElementById('exam-screen').classList.remove('hidden');
     activeSet = shuffle([...BANK]).slice(0, 45);
-    const container = document.getElementById('exam-list');
-    container.innerHTML = '';
+    const container = document.getElementById('exam-list'); container.innerHTML = '';
     activeSet.forEach((item, idx) => {
         let opts = shuffle([...item.o]);
-        const div = document.createElement('div');
-        div.className = 'exam-item';
+        const div = document.createElement('div'); div.className = 'exam-item';
         div.innerHTML = `<div class="exam-q">${idx+1}. ${item.q}</div>` + 
             opts.map(o => `<label class="exam-opt"><input type="radio" name="q${idx}" value="${o}" onchange="examAnswers[${idx}]='${o}'"> ${o}</label>`).join('');
         container.appendChild(div);
@@ -366,26 +181,21 @@ function initExam() {
 }
 
 function submitExam() {
-    let score = 0;
-    activeSet.forEach((item, idx) => { if(examAnswers[idx] === item.a) score++; });
+    let score = 0; activeSet.forEach((item, idx) => { if(examAnswers[idx] === item.a) score++; });
     const perc = Math.round((score/activeSet.length)*100);
     const header = document.getElementById('exam-result-header');
     header.innerHTML = `<div style="background:var(--panel); padding:20px; border-radius:15px; text-align:center; margin-bottom:20px; border:1px solid var(--border)"><h2>${perc}%</h2><p>${score} von ${activeSet.length} richtig</p></div>`;
-    header.classList.remove('hidden');
-    window.scrollTo(0,0);
+    header.classList.remove('hidden'); window.scrollTo(0,0);
 }
 
 const modules = [...new Set(BANK.map(x=>x.m))];
 const modContainer = document.getElementById('module-list');
 modules.forEach(m => {
-    const btn = document.createElement('div');
-    btn.className = 'mode-card'; btn.style.padding = '10px 15px';
-    btn.innerHTML = `<span style="font-weight:bold;">${m}</span>`;
-    btn.onclick = () => initTrainer(m);
-    modContainer.appendChild(btn);
+    const btn = document.createElement('div'); btn.className = 'mode-card'; 
+    btn.innerHTML = `<span style="font-weight:bold; font-size:0.9rem;">${m}</span>`;
+    btn.onclick = () => initTrainer(m); modContainer.appendChild(btn);
 });
 </script>
-<!-- Back to index button -->
-<a href="index.html" class="btn btn-outline" style="position:fixed; right:16px; bottom:16px; z-index:999;">Zurück zur Startseite</a>
+<a href="index.html" class="btn btn-outline" style="position:fixed; right:16px; bottom:16px; z-index:999; background: var(--bg);">Zurück</a>
 </body>
 </html>
