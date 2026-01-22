@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberOffz | Security Training Platform</title>
+    <title>CyberOffz | Training Hub</title>
     <style>
         :root {
             --bg: #0f172a;
@@ -12,14 +12,11 @@
             --accent: #22c55e;
             --text: #f8fafc;
             --muted: #94a3b8;
-            --glow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
         body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
-        /* HEADER */
         header {
             padding: 20px 40px;
             display: flex;
@@ -29,198 +26,90 @@
             backdrop-filter: blur(10px);
             position: sticky; top: 0; z-index: 100; background: rgba(15, 23, 42, 0.9);
         }
-        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px; letter-spacing: -1px; }
-        .nav-btn { background: var(--surface); color: var(--text); padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
 
-        /* HERO SECTION */
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .hero { text-align: center; padding: 80px 20px; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero p { color: var(--muted); font-size: 1.2rem; margin-bottom: 40px; }
-        
-        .cta-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            padding: 15px 30px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: inline-flex; align-items: center; gap: 8px;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6); }
-        .btn-secondary {
-            background: rgba(255,255,255,0.05);
-            color: var(--text);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-        /* MODULE GRID */
-        .grid-section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
-        .section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+        .grid-section { padding: 20px; max-width: 1100px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
 
         .card {
             background: var(--surface);
             border: 1px solid rgba(255,255,255,0.05);
-            padding: 25px;
-            border-radius: 16px;
+            padding: 30px;
+            border-radius: 20px;
             transition: 0.3s;
-            cursor: pointer;
             text-decoration: none;
             color: inherit;
-            display: block;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .card-icon { font-size: 2rem; margin-bottom: 15px; display: block; }
-        .card h3 { margin-bottom: 10px; font-size: 1.2rem; }
-        .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
-        .badge {
-            display: inline-block;
-            padding: 4px 8px;
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--primary);
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-
-        /* STATS */
-        .stats {
             display: flex;
-            justify-content: center;
-            gap: 50px;
-            padding: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            background: rgba(0,0,0,0.2);
-            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .stat-item { text-align: center; }
-        .stat-val { font-size: 2.5rem; font-weight: 800; color: var(--text); display: block; }
-        .stat-label { color: var(--muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* FOOTER */
-        footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.9rem; }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .card-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .card p { color: var(--muted); margin-bottom: 20px; flex-grow: 1; }
         
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2.5rem; }
-            .stats { gap: 20px; }
+        .btn-start {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
+
+        footer { text-align: center; padding: 60px; color: var(--muted); font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">🛡️ CyberOffz</div>
-        <a href="infosichh.html" class="nav-btn">Login</a>
     </header>
 
     <section class="hero">
-        <h1>Wissen ist deine <br><span style="color: var(--primary)">stärkste Firewall.</span></h1>
-        <p>Die moderne Lernplattform für Informationssicherheit, Datenschutz und Cyber-Defense. Trainiere spezifische Module oder simuliere den Ernstfall.</p>
-        
-        <div class="cta-group">
-            <a href="infosichh.html" class="btn btn-primary">🚀 Training Starten</a>
-            <a href="#modules" class="btn btn-secondary">↓ Module ansehen</a>
-        </div>
+        <h1>Wähle dein <span style="color: var(--primary)">Einsatzgebiet.</span></h1>
+        <p>Professionelle Ausbildung für Offiziere und Fachpersonal. Wähle eine Kategorie, um das Training zu starten.</p>
     </section>
 
-    <div class="stats">
-        <div class="stat-item">
-            <span class="stat-val">96+</span>
-            <span class="stat-label">Lernfragen</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-val">6</span>
-            <span class="stat-label">Fach-Module</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-val">∞</span>
-            <span class="stat-label">Wiederholungen</span>
-        </div>
-    </div>
-
-    <section id="modules" class="grid-section">
-        <h2 class="section-title">Wähle dein Missionsziel</h2>
+    <section class="grid-section">
         <div class="grid">
             <a href="infosichh.html" class="card">
-                <span class="card-icon">⚡</span>
-                <h3>Speed Trainer</h3>
-                <p>Der gesamte Fragenkatalog im Random-Modus. Perfekt für schnelles Wiederholen und Festigen.</p>
-                <span class="badge">BELIEBT</span>
+                <div>
+                    <span class="card-icon">🔐</span>
+                    <h3>Informationssicherheit</h3>
+                    <p>Datenschutz, Krypto, Abstrahlsicherheit und Bedrohungsszenarien (APT).</p>
+                </div>
+                <div class="btn-start">Training öffnen</div>
             </a>
 
-            <a href="infosichh.html" class="card">
-                <span class="card-icon">📝</span>
-                <h3>Prüfungssimulation</h3>
-                <p>45 Fragen, keine Hilfestellung, knallharte Auswertung. Bist du bereit für die Zertifizierung?</p>
-                <span class="badge" style="color: var(--accent); background: rgba(34,197,94,0.1)">TEST MODUS</span>
+            <a href="querschnitt.html" class="card">
+                <div>
+                    <span class="card-icon">🌍</span>
+                    <h3>Allg. Querschnitt</h3>
+                    <p>Rechtliche Grundlagen, Führungsgrundsätze und allgemeines militärisches Wissen.</p>
+                </div>
+                <div class="btn-start">Training öffnen</div>
             </a>
 
-            <a href="infosichh.html" class="card">
-                <span class="card-icon">🔒</span>
-                <h3>Kryptosicherheit</h3>
-                <p>Symmetrische vs. Asymmetrische Verfahren, Schlüsselverteilung und Hardware-Sicherheit.</p>
-                <span class="badge">HARD SKILL</span>
-            </a>
-
-            <a href="infosichh.html" class="card">
-                <span class="card-icon">⚖️</span>
-                <h3>Datenschutz & Recht</h3>
-                <p>DSGVO, Schutzbereiche (1-3), BPersDat und der richtige Umgang mit VS.</p>
-                <span class="badge">THEORIE</span>
-            </a>
-
-            <a href="infosichh.html" class="card">
-                <span class="card-icon">📡</span>
-                <h3>Abstrahlsicherheit</h3>
-                <p>Zonenmodelle, TEMPEST, MEP-Plaketten und sichere Nutzung mobiler Geräte.</p>
-                <span class="badge">TECHNIK</span>
-            </a>
-
-            <a href="infosichh.html" class="card">
-                <span class="card-icon">👾</span>
-                <h3>Bedrohungen & APT</h3>
-                <p>Cyber Kill Chain, MITRE ATT&CK, Phishing und Social Engineering erkennen.</p>
-                <span class="badge">RED TEAM</span>
+            <a href="gefechtsstandskonzept.html" class="card">
+                <div>
+                    <span class="card-icon">⛺</span>
+                    <h3>Gefechtsstandskonzept Heer</h3>
+                    <p>Organisation, Aufbau und Betrieb von Gefechtsständen im mobilen Einsatz.</p>
+                </div>
+                <div class="btn-start">Training öffnen</div>
             </a>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 CyberOffz Lernplattform. <br>Entwickelt für effiziente Ausbildung.</p>
+        <p>© 2026 CyberOffz Lernplattform. <br>Wissen ist die stärkste Firewall.</p>
     </footer>
 
 </body>
 </html>
-

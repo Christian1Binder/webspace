@@ -82,6 +82,7 @@ h1, h2, h3 { margin:0 0 10px 0; }
     <div style="margin:40px 0; text-align:center;">
         <div style="font-size:3rem; margin-bottom:10px;">🛡️</div>
         <h1>CyberOffz Lernportal</h1>
+        <h2>Informationssicherheit</h2>
         <p style="color:var(--muted)">Wähle deinen Modus.</p>
     </div>
     <div class="mode-card" onclick="initTrainer('ALL')">
@@ -197,27 +198,9 @@ const BANK = [
     { q: "Wer unterstützt den Dienststellenleiter fachlich bei der Umsetzung der Informationssicherheit?", a: "Der Informationssicherheitsbeauftragte (ISB).", e: "Der ISB ist der zentrale Ansprechpartner und Koordinator für InfoSi.", o: ["Der S6-Offizier", "Der IT-Administrator", "Der Informationssicherheitsbeauftragte (ISB).", "Der Spieß"], m: "SCHUTZKONZEPTE" },
     { q: "Welche Aufgabe hat der IT-Sicherheitsbeauftragte (IT-SiB)?", a: "Umsetzung technischer Sicherheitsmaßnahmen im IT-System.", o: ["Schreiben von Gesetzen", "Umsetzung technischer Sicherheitsmaßnahmen im IT-System.", "Kontrolle des Speiseplans", "Überprüfung der körperlichen Fitness"], m: "SCHUTZKONZEPTE" },
     // --- NEUE FRAGEN: DATENSCHUTZ & GRUNDLAGEN (Gemäß Präsentation) ---
-    { 
-        q: "Was versteht man unter dem Gewährleistungsziel 'Nichtverkettung'?", 
-        a: "Zu unterschiedlichen Zwecken erhobene Daten dürfen nicht einfach zusammengeführt werden.", 
-        e: "Daten müssen zweckgebunden verarbeitet werden. Eine wahllose Verknüpfung verschiedener Datenbanken ist unzulässig.", 
-        o: ["Daten müssen nach 10 Jahren automatisch gelöscht werden.", "Daten dürfen nur verschlüsselt gespeichert werden.", "Zu unterschiedlichen Zwecken erhobene Daten dürfen nicht einfach zusammengeführt werden.", "Der Zugriff auf Daten muss lückenlos protokolliert werden."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Welche Daten gehören zu den 'Besonderen personenbezogenen Daten' (BPersDat) gemäß Art. 9 DSGVO?", 
-        a: "Gesundheitsdaten, religiöse Überzeugung oder biometrische Daten.", 
-        e: "Diese Daten gelten als besonders sensibel und schutzbedürftig, da ihr Missbrauch tiefgreifende Auswirkungen auf die Persönlichkeitsrechte hat.", 
-        o: ["Name, Dienstgrad und dienstliche Telefonnummer.", "Gesundheitsdaten, religiöse Überzeugung oder biometrische Daten.", "Private Anschrift und Bankverbindung.", "Personalnummer und Beurteilungen."], 
-        m: "DATENSCHUTZ" 
-    },
-    { 
-        q: "Welches Gewährleistungsziel fordert, dass Betroffene ihre Rechte (z.B. Löschung, Auskunft) wahrnehmen können?", 
-        a: "Intervenierbarkeit.", 
-        e: "Der Betroffene muss in den Datenverarbeitungsprozess 'intervenieren' können, um z.B. Fehler zu korrigieren oder Löschungen zu beantragen.", 
-        o: ["Transparenz.", "Intervenierbarkeit.", "Nichtverkettung.", "Integrität."], 
-        m: "DATENSCHUTZ" 
-    },
+    { q: "Was versteht man unter dem Gewährleistungsziel 'Nichtverkettung'?", a: "Zu unterschiedlichen Zwecken erhobene Daten dürfen nicht einfach zusammengeführt werden.", e: "Daten müssen zweckgebunden verarbeitet werden. Eine wahllose Verknüpfung verschiedener Datenbanken ist unzulässig.", o: ["Daten müssen nach 10 Jahren automatisch gelöscht werden.", "Daten dürfen nur verschlüsselt gespeichert werden.", "Zu unterschiedlichen Zwecken erhobene Daten dürfen nicht einfach zusammengeführt werden.", "Der Zugriff auf Daten muss lückenlos protokolliert werden."], m: "DATENSCHUTZ" },
+    { q: "Welche Daten gehören zu den 'Besonderen personenbezogenen Daten' (BPersDat) gemäß Art. 9 DSGVO?", a: "Gesundheitsdaten, religiöse Überzeugung oder biometrische Daten.", e: "Diese Daten gelten als besonders sensibel und schutzbedürftig, da ihr Missbrauch tiefgreifende Auswirkungen auf die Persönlichkeitsrechte hat.", o: ["Name, Dienstgrad und dienstliche Telefonnummer.", "Gesundheitsdaten, religiöse Überzeugung oder biometrische Daten.", "Private Anschrift und Bankverbindung.", "Personalnummer und Beurteilungen."], m: "DATENSCHUTZ" },
+    { q: "Welches Gewährleistungsziel fordert, dass Betroffene ihre Rechte (z.B. Löschung, Auskunft) wahrnehmen können?",a: "Intervenierbarkeit.",e: "Der Betroffene muss in den Datenverarbeitungsprozess 'intervenieren' können, um z.B. Fehler zu korrigieren oder Löschungen zu beantragen.", o: ["Transparenz.", "Intervenierbarkeit.", "Nichtverkettung.", "Integrität."], m: "DATENSCHUTZ"},
     { 
         q: "Was besagt das Prinzip der 'Datenminimierung'?", 
         a: "Die Verarbeitung ist auf das notwendige und dem Zweck angemessene Maß zu beschränken.", 
@@ -665,6 +648,8 @@ modules.forEach(m => {
     modContainer.appendChild(btn);
 });
 </script>
+<!-- Back to index button -->
+<a href="index.html" class="btn btn-outline" style="position:fixed; right:16px; bottom:16px; z-index:999;">Zurück zur Startseite</a>
 </body>
 </html>
 
