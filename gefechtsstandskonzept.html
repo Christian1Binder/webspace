@@ -10,33 +10,20 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛺</text></svg>">
 
 <style>
-:root {
-  --bg: #0f172a; --panel: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
-  --accent: #3b82f6; --success: #22c55e; --error: #ef4444; --border: rgba(255,255,255,0.1);
-  --warning: #f59e0b;
-}
+:root { --bg: #0f172a; --panel: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --accent: #3b82f6; --success: #22c55e; --error: #ef4444; --border: rgba(255,255,255,0.1); --warning: #f59e0b; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
-
-/* UTILS */
+body { margin:0; font-family:-apple-system, system-ui, sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
 .wrap { width:100%; max-width:850px; margin:0 auto; padding:20px; padding-bottom:100px; flex:1; display:flex; flex-direction:column; position:relative; }
 .scroll-wrap { overflow-y:auto; flex:1; -webkit-overflow-scrolling: touch; }
 .hidden { display:none !important; }
-
-/* BUTTONS */
 .btn { border:none; padding:16px 24px; border-radius:12px; font-weight:bold; cursor:pointer; font-size:1.1rem; color:white; transition:0.2s; display:inline-flex; align-items:center; justify-content:center; gap:8px; touch-action: manipulation; }
-.btn:active { transform:scale(0.98); }
 .btn-primary { background:var(--accent); box-shadow:0 4px 12px rgba(59,130,246,0.3); }
 .btn-outline { background:transparent; border:1px solid var(--border); color:var(--muted); font-size:0.9rem; padding:10px 16px; }
 .btn-block { width:100%; }
-
-/* START SCREEN */
 #start-screen { text-align:center; }
 .mode-card { background:var(--panel); border:1px solid var(--border); padding:12px 16px; border-radius:16px; margin-bottom:15px; text-align:left; cursor:pointer; transition:0.2s; display:flex; justify-content:space-between; align-items:center; }
-.mode-card:active { background:rgba(255,255,255,0.05); border-color:var(--accent); }
+.mode-card:active { background:rgba(255,255,255,0.05); }
 .tag { font-size:0.75rem; padding:4px 8px; border-radius:6px; background:rgba(255,255,255,0.1); font-weight:bold; }
-
-/* TRAINER MODE */
 .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; font-size:0.9rem; color:var(--muted); }
 .streak-box { color:var(--accent); font-weight:bold; font-size:1.1rem; }
 .progress-track { height:8px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; margin-bottom:20px; }
@@ -48,18 +35,11 @@ body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
 .opt-btn { background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:18px; border-radius:12px; color:var(--text); text-align:left; cursor:pointer; transition:0.1s; display:flex; align-items:center; min-height:60px; }
 .opt-btn.correct { background:rgba(34,197,94,0.15); border-color:var(--success); color:var(--success); }
 .opt-btn.wrong { background:rgba(239,68,68,0.15); border-color:var(--error); color:var(--error); opacity:0.6; }
-.opt-btn.disabled { pointer-events:none; }
-
-.expl-box { padding:15px; border-radius:12px; margin-top:0px; display:none; animation:fadeIn 0.3s; font-size:0.95rem; line-height:1.5; border-left:4px solid transparent; background:rgba(0,0,0,0.2); }
-.expl-box.is-correct { border-left-color:var(--success); }
-.expl-box.is-wrong { border-left-color:var(--error); }
-
-/* EXAM MODE */
+.expl-box { padding:15px; border-radius:12px; display:none; animation:fadeIn 0.3s; font-size:0.95rem; line-height:1.5; border-left:4px solid transparent; background:rgba(0,0,0,0.2); }
+.expl-box.is-correct { border-left-color:var(--success); display:block; }
 .exam-item { background:var(--panel); padding:20px; border-radius:12px; border:1px solid var(--border); margin-bottom:15px; }
-.exam-q { font-size:1.1rem; font-weight:600; margin-bottom:15px; }
-.exam-opt { display:flex; align-items:start; gap:15px; padding:12px; cursor:pointer; border-radius:8px; }
-.exam-score-box { background:var(--panel); padding:30px; border-radius:20px; margin-bottom:20px; text-align:center; border:1px solid var(--border); }
-
+.exam-q { font-size:1.1rem; font-weight:600; margin-bottom:10px; }
+.learn-a { color:var(--success); font-weight:bold; margin-bottom:5px; }
 @keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 </style>
 </head>
@@ -69,20 +49,18 @@ body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
     <div style="margin:40px 0; text-align:center;">
         <div style="font-size:3rem; margin-bottom:10px;">⛺</div>
         <h1>Gefechtsstandskonzept Heer</h1>
-        <p style="color:var(--muted)">Ausbildung für den Einsatz.</p>
+        <p style="color:var(--muted)">Organisation, Aufbau und Betrieb im Einsatz.</p>
+    </div>
+    <div class="mode-card" onclick="initLearnMode()">
+        <div><h3>📖 Lernmodus</h3><div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Alle Fragen & Antworten lesen</div></div>
+        <div class="tag" style="background:var(--success)">LERNEN</div>
     </div>
     <div class="mode-card" onclick="initTrainer('ALL')">
-        <div>
-            <h3>🚀 Schnelles Training</h3>
-            <div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Alle Fragen • Direktes Feedback</div>
-        </div>
-        <div class="tag" style="background:var(--accent)">LERNEN</div>
+        <div><h3>🚀 Speed-Trainer</h3><div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Training • Sofort-Feedback</div></div>
+        <div class="tag" style="background:var(--accent)">ÜBEN</div>
     </div>
     <div class="mode-card" onclick="initExam()">
-        <div>
-            <h3>📝 Prüfungssimulation</h3>
-            <div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">45 Fragen • Zeitbegrenzung • Score</div>
-        </div>
+        <div><h3>📝 Prüfungssimulation</h3><div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">45 Fragen Mix • Status Quo</div></div>
         <div class="tag" style="background:var(--warning); color:#000;">TEST</div>
     </div>
     <h3 style="margin-top:30px; border-bottom:1px solid var(--border); padding-bottom:10px;">Themen-Filter</h3>
@@ -95,24 +73,29 @@ body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
         <div class="streak-box">🔥 <span id="t-streak">0</span></div>
     </div>
     <div class="progress-track"><div id="t-progress" class="progress-fill"></div></div>
-    
     <div class="card">
         <div class="q-meta"><span id="t-mod">MODUL</span> • <span id="t-idx">1/10</span></div>
         <div class="q-text" id="t-question"></div>
         <div class="opt-grid" id="t-options"></div>
-        
         <div id="t-expl" class="expl-box">
             <span style="font-weight:bold; display:block; margin-bottom:5px;" id="t-expl-title"></span>
             <span id="t-expl-text"></span>
         </div>
     </div>
-    
     <button id="next-btn" class="btn btn-primary btn-block" style="display:none; margin-bottom:30px;" onclick="nextCard()">Nächste Frage ➔</button>
+</div>
+
+<div id="learn-screen" class="wrap scroll-wrap hidden">
+    <div class="top-bar">
+        <button class="btn btn-outline" onclick="window.location.href='index.html'">Zurück</button>
+        <div>Lernmodus</div>
+    </div>
+    <div id="learn-list"></div>
 </div>
 
 <div id="exam-screen" class="wrap scroll-wrap hidden">
     <div class="top-bar">
-        <button class="btn btn-outline" onclick="if(confirm('Prüfung abbrechen?')) window.location.href='index.html'">Abbrechen</button>
+        <button class="btn btn-outline" onclick="if(confirm('Abbrechen?')) window.location.href='index.html'">Abbrechen</button>
         <div>Simulation</div>
     </div>
     <div id="exam-result-header" class="hidden"></div>
@@ -121,8 +104,6 @@ body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Robo
 </div>
 
 <script>
-/* --- DATENBANK: GEFECHTSSTAND KONZEPT --- */
-/* Hier kannst du deine Fragen-Arrays reinkopieren */
 const BANK = [
     { 
         q: "Was ist der primäre Zweck eines Gefechtsstandes (GfStd)?", 
@@ -137,45 +118,42 @@ const BANK = [
         e: "Die innere Sicherung schützt den unmittelbaren Arbeitsbereich vor unbefugtem Zutritt.", 
         o: ["Artillerie-Unterstützung.", "Wachen und Zutrittskontrollen.", "Aufklärungsdrohnen.", "Pioniersperren."], 
         m: "AUFBAU" 
-    },
-    // PLATZHALTER: Kopiere hier weitere Fragen nach dem gleichen Schema rein...
+    }
 ];
 
-/* --- LOGIC (Analog zu infosichh) --- */
-let activeSet = [];
-let retryStack = [];
-let currentIndex = 0;
-let streak = 0;
-let isExam = false;
-let examAnswers = {};
+let activeSet = []; let retryStack = []; let currentIndex = 0; let streak = 0; let isExam = false; let examAnswers = {};
 
-function shuffle(arr) {
-    for(let i=arr.length-1; i>0; i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-}
+function shuffle(arr) { for(let i=arr.length-1; i>0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 
 function initTrainer(filter) {
-    isExam = false;
-    document.getElementById('start-screen').classList.add('hidden');
-    document.getElementById('trainer-screen').classList.remove('hidden');
+    isExam = false; document.getElementById('start-screen').classList.add('hidden'); document.getElementById('trainer-screen').classList.remove('hidden');
     activeSet = (filter === 'ALL') ? [...BANK] : BANK.filter(x => x.m === filter);
-    shuffle(activeSet);
-    currentIndex = 0; streak = 0; retryStack = [];
-    updateStreak(); loadCard();
+    shuffle(activeSet); currentIndex = 0; streak = 0; retryStack = []; updateStreak(); loadCard();
+}
+
+function initLearnMode() {
+    document.getElementById('start-screen').classList.add('hidden');
+    document.getElementById('learn-screen').classList.remove('hidden');
+    const container = document.getElementById('learn-list');
+    container.innerHTML = '';
+    BANK.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'exam-item';
+        div.innerHTML = `
+            <div class="q-meta">${item.m}</div>
+            <div class="exam-q">${idx+1}. ${item.q}</div>
+            <div class="learn-a">Antwort: ${item.a}</div>
+            <div style="color:var(--muted); font-size:0.9rem; border-top:1px solid var(--border); padding-top:5px; margin-top:5px;">${item.e}</div>
+        `;
+        container.appendChild(div);
+    });
 }
 
 function loadCard() {
     document.getElementById('next-btn').style.display = 'none';
     if(currentIndex >= activeSet.length) {
-        if(retryStack.length > 0) {
-            alert(`Runde beendet. ${retryStack.length} Fehler werden wiederholt!`);
-            activeSet = [...retryStack]; retryStack = []; currentIndex = 0; shuffle(activeSet);
-        } else {
-            alert("Modul erfolgreich abgeschlossen!"); window.location.href='index.html'; return;
-        }
+        if(retryStack.length > 0) { alert(`${retryStack.length} Fehler werden wiederholt.`); activeSet = [...retryStack]; retryStack = []; currentIndex = 0; shuffle(activeSet); } 
+        else { alert("Modul abgeschlossen!"); window.location.href='index.html'; return; }
     }
     const item = activeSet[currentIndex];
     document.getElementById('t-mod').innerText = item.m;
@@ -185,7 +163,6 @@ function loadCard() {
     const c = document.getElementById('t-options');
     c.innerHTML = ''; c.classList.remove('locked');
     document.getElementById('t-expl').style.display = 'none';
-    
     let opts = item.o.map(o => ({ txt:o, isCorrect: o===item.a }));
     shuffle(opts);
     opts.forEach((o, i) => {
@@ -200,34 +177,31 @@ function loadCard() {
 function checkTrainerAnswer(btn, isCorrect, item) {
     if(btn.parentElement.classList.contains('locked')) return;
     btn.parentElement.classList.add('locked');
-    const explBox = document.getElementById('t-expl');
-    explBox.style.display = 'block';
-    explBox.className = 'expl-box ' + (isCorrect ? 'is-correct' : 'is-wrong');
-    document.getElementById('t-expl-title').innerText = isCorrect ? "✓ Richtig!" : "✗ Nicht ganz.";
+    const ex = document.getElementById('t-expl');
+    ex.style.display = 'block';
+    ex.className = 'expl-box ' + (isCorrect ? 'is-correct' : 'is-wrong');
+    document.getElementById('t-expl-title').innerText = isCorrect ? "✓ Richtig" : "✗ Falsch";
     document.getElementById('t-expl-text').innerText = item.e;
-    
+    if(navigator.vibrate) navigator.vibrate(isCorrect ? 50 : 200);
     if(isCorrect) { btn.classList.add('correct'); streak++; }
-    else { btn.classList.add('wrong'); streak = 0; retryStack.push(item); 
+    else { btn.classList.add('wrong'); streak = 0; retryStack.push(item);
            Array.from(document.querySelectorAll('.opt-btn')).forEach(b => { if(b.innerText.includes(item.a)) b.classList.add('correct'); });
     }
     updateStreak();
-    document.getElementById('next-btn').style.display = 'block';
+    const nb = document.getElementById('next-btn'); nb.style.display = 'block';
+    setTimeout(() => { nb.scrollIntoView({behavior: "smooth", block: "center"}); }, 100);
 }
 
 function nextCard() { currentIndex++; loadCard(); }
 function updateStreak() { document.getElementById('t-streak').innerText = streak; }
 
 function initExam() {
-    isExam = true;
-    document.getElementById('start-screen').classList.add('hidden');
-    document.getElementById('exam-screen').classList.remove('hidden');
+    isExam = true; document.getElementById('start-screen').classList.add('hidden'); document.getElementById('exam-screen').classList.remove('hidden');
     activeSet = shuffle([...BANK]).slice(0, 45);
-    const container = document.getElementById('exam-list');
-    container.innerHTML = '';
+    const container = document.getElementById('exam-list'); container.innerHTML = '';
     activeSet.forEach((item, idx) => {
         let opts = shuffle([...item.o]);
-        const div = document.createElement('div');
-        div.className = 'exam-item';
+        const div = document.createElement('div'); div.className = 'exam-item';
         div.innerHTML = `<div class="exam-q">${idx+1}. ${item.q}</div>` + 
             opts.map(o => `<label class="exam-opt"><input type="radio" name="q${idx}" value="${o}" onchange="examAnswers[${idx}]='${o}'"> ${o}</label>`).join('');
         container.appendChild(div);
@@ -235,27 +209,21 @@ function initExam() {
 }
 
 function submitExam() {
-    let score = 0;
-    activeSet.forEach((item, idx) => { if(examAnswers[idx] === item.a) score++; });
+    let score = 0; activeSet.forEach((item, idx) => { if(examAnswers[idx] === item.a) score++; });
     const perc = Math.round((score/activeSet.length)*100);
     const header = document.getElementById('exam-result-header');
-    header.innerHTML = `<div class="exam-score-box"><h2>${perc}%</h2><p>${score} von ${activeSet.length} richtig</p></div>`;
-    header.classList.remove('hidden');
-    window.scrollTo(0,0);
+    header.innerHTML = `<div style="background:var(--panel); padding:20px; border-radius:15px; text-align:center; margin-bottom:20px; border:1px solid var(--border)"><h2>${perc}%</h2><p>${score} von ${activeSet.length} richtig</p></div>`;
+    header.classList.remove('hidden'); window.scrollTo(0,0);
 }
 
-/* Modul-Liste generieren */
 const modules = [...new Set(BANK.map(x=>x.m))];
 const modContainer = document.getElementById('module-list');
 modules.forEach(m => {
-    const btn = document.createElement('div');
-    btn.className = 'mode-card'; btn.style.padding = '10px 15px';
-    btn.innerHTML = `<span style="font-weight:bold;">${m}</span>`;
-    btn.onclick = () => initTrainer(m);
-    modContainer.appendChild(btn);
+    const btn = document.createElement('div'); btn.className = 'mode-card'; 
+    btn.innerHTML = `<span style="font-weight:bold; font-size:0.9rem;">${m}</span>`;
+    btn.onclick = () => initTrainer(m); modContainer.appendChild(btn);
 });
 </script>
-<!-- Back to index button -->
-<a href="index.html" class="btn btn-outline" style="position:fixed; right:16px; bottom:16px; z-index:999;">Zurück zur Startseite</a>
+<a href="index.html" class="btn btn-outline" style="position:fixed; right:16px; bottom:16px; z-index:999; background: var(--bg);">Zurück</a>
 </body>
 </html>
