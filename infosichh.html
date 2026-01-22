@@ -5,41 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0f172a">
-<title>CyberOffz: Ultimate Trainer</title>
+<title>CyberOffz: Informationssicherheit</title>
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231e293b%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2270%22>🛡️</text></svg>">
 
 <style>
-:root {
-  --bg: #0f172a; --panel: #1e293b; --text: #f1f5f9; --muted: #94a3b8;
-  --accent: #3b82f6; --success: #22c55e; --error: #ef4444; --border: rgba(255,255,255,0.1);
-  --warning: #f59e0b;
-}
+:root { --bg: #0f172a; --panel: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --accent: #3b82f6; --success: #22c55e; --error: #ef4444; --border: rgba(255,255,255,0.1); --warning: #f59e0b; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body { margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
-
-/* UTILS */
+body { margin:0; font-family:-apple-system, system-ui, sans-serif; background:var(--bg); color:var(--text); height:100vh; display:flex; flex-direction:column; overflow:hidden; }
 .wrap { width:100%; max-width:850px; margin:0 auto; padding:20px; padding-bottom:100px; flex:1; display:flex; flex-direction:column; position:relative; }
 .scroll-wrap { overflow-y:auto; flex:1; -webkit-overflow-scrolling: touch; }
 .hidden { display:none !important; }
-h1, h2, h3 { margin:0 0 10px 0; }
-
-/* BUTTONS */
 .btn { border:none; padding:16px 24px; border-radius:12px; font-weight:bold; cursor:pointer; font-size:1.1rem; color:white; transition:0.2s; display:inline-flex; align-items:center; justify-content:center; gap:8px; touch-action: manipulation; }
-.btn:active { transform:scale(0.98); }
 .btn-primary { background:var(--accent); box-shadow:0 4px 12px rgba(59,130,246,0.3); }
-.btn-exam { background:var(--warning); color:#000; }
 .btn-outline { background:transparent; border:1px solid var(--border); color:var(--muted); font-size:0.9rem; padding:10px 16px; }
 .btn-block { width:100%; }
-
-/* START SCREEN */
 #start-screen { text-align:center; }
-.mode-card { background:var(--panel); border:1px solid var(--border); padding:20px; border-radius:16px; margin-bottom:15px; text-align:left; cursor:pointer; transition:0.2s; display:flex; justify-content:space-between; align-items:center; }
-.mode-card:active { background:rgba(255,255,255,0.05); border-color:var(--accent); }
+.mode-card { background:var(--panel); border:1px solid var(--border); padding:12px 16px; border-radius:16px; margin-bottom:15px; text-align:left; cursor:pointer; transition:0.2s; display:flex; justify-content:space-between; align-items:center; }
+.mode-card:active { background:rgba(255,255,255,0.05); }
 .tag { font-size:0.75rem; padding:4px 8px; border-radius:6px; background:rgba(255,255,255,0.1); font-weight:bold; }
-
-/* TRAINER MODE */
 .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; font-size:0.9rem; color:var(--muted); }
 .streak-box { color:var(--accent); font-weight:bold; font-size:1.1rem; }
 .progress-track { height:8px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; margin-bottom:20px; }
@@ -49,30 +33,13 @@ h1, h2, h3 { margin:0 0 10px 0; }
 .q-text { font-size:1.35rem; line-height:1.45; font-weight:700; }
 .opt-grid { display:grid; gap:12px; }
 .opt-btn { background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:18px; border-radius:12px; color:var(--text); text-align:left; cursor:pointer; transition:0.1s; display:flex; align-items:center; min-height:60px; }
-.opt-btn:active:not(.disabled) { background:rgba(255,255,255,0.1); transform:scale(0.99); }
-.opt-key { background:rgba(0,0,0,0.3); width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:6px; margin-right:15px; font-size:0.9rem; font-family:monospace; border:1px solid var(--border); color:var(--muted); flex-shrink:0; }
 .opt-btn.correct { background:rgba(34,197,94,0.15); border-color:var(--success); color:var(--success); }
 .opt-btn.wrong { background:rgba(239,68,68,0.15); border-color:var(--error); color:var(--error); opacity:0.6; }
-.opt-btn.disabled { pointer-events:none; }
-
-/* EXPLANATION BOX */
-.expl-box { padding:15px; border-radius:12px; margin-top:0px; display:none; animation:fadeIn 0.3s; font-size:0.95rem; line-height:1.5; border-left:4px solid transparent; background:rgba(0,0,0,0.2); }
-.expl-box.is-correct { border-left-color:var(--success); }
-.expl-box.is-wrong { border-left-color:var(--error); }
-.expl-title { font-weight:bold; margin-bottom:5px; display:block; }
-
-/* EXAM MODE */
+.expl-box { padding:15px; border-radius:12px; display:none; animation:fadeIn 0.3s; font-size:0.95rem; line-height:1.5; border-left:4px solid transparent; background:rgba(0,0,0,0.2); }
+.expl-box.is-correct { border-left-color:var(--success); display:block; }
 .exam-item { background:var(--panel); padding:20px; border-radius:12px; border:1px solid var(--border); margin-bottom:15px; }
-.exam-q { font-size:1.1rem; font-weight:600; margin-bottom:15px; }
-.exam-opt { display:flex; align-items:start; gap:15px; padding:12px; cursor:pointer; border-radius:8px; transition:background 0.2s; }
-.exam-opt:active { background:rgba(255,255,255,0.05); }
-.exam-opt input { margin-top:4px; transform:scale(1.3); }
-.exam-expl { margin-top:15px; padding-top:15px; border-top:1px solid var(--border); color:var(--muted); font-size:0.9rem; display:none; }
-.exam-item.graded-correct { border-color:var(--success); }
-.exam-item.graded-wrong { border-color:var(--error); }
-.exam-item.graded-correct .exam-expl, .exam-item.graded-wrong .exam-expl { display:block; }
-.exam-score-box { background:var(--panel); padding:30px; border-radius:20px; margin-bottom:20px; text-align:center; border:1px solid var(--border); }
-
+.exam-q { font-size:1.1rem; font-weight:600; margin-bottom:10px; }
+.learn-a { color:var(--success); font-weight:bold; margin-bottom:5px; }
 @keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
 </style>
 </head>
@@ -81,22 +48,19 @@ h1, h2, h3 { margin:0 0 10px 0; }
 <div id="start-screen" class="wrap scroll-wrap">
     <div style="margin:40px 0; text-align:center;">
         <div style="font-size:3rem; margin-bottom:10px;">🛡️</div>
-        <h1>CyberOffz Lernportal</h1>
-        <h2>Informationssicherheit</h2>
-        <p style="color:var(--muted)">Wähle deinen Modus.</p>
+        <h1>Informationssicherheit</h1>
+        <p style="color:var(--muted)">Datenschutz, Krypto & Abstrahlsicherheit</p>
+    </div>
+    <div class="mode-card" onclick="initLearnMode()">
+        <div><h3>📖 Lernmodus</h3><div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Alle 96 Fragen & Lösungen studieren</div></div>
+        <div class="tag" style="background:var(--success)">LERNEN</div>
     </div>
     <div class="mode-card" onclick="initTrainer('ALL')">
-        <div>
-            <h3>🚀 Speed-Trainer (Alles)</h3>
-            <div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Karteikarten • Sofort-Feedback • Vibra</div>
-        </div>
-        <div class="tag" style="background:var(--accent)">LERNEN</div>
+        <div><h3>🚀 Speed-Trainer</h3><div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Training • Sofort-Feedback</div></div>
+        <div class="tag" style="background:var(--accent)">ÜBEN</div>
     </div>
     <div class="mode-card" onclick="initExam()">
-        <div>
-            <h3>📝 Prüfungsmodus (45)</h3>
-            <div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Listenansicht • Ernstfall • Note</div>
-        </div>
+        <div><h3>📝 Prüfungssimulation</h3><div style="color:var(--muted); font-size:0.85rem; margin-top:5px;">Alle Themen • 45 Fragen</div></div>
         <div class="tag" style="background:var(--warning); color:#000;">TEST</div>
     </div>
     <h3 style="margin-top:30px; border-bottom:1px solid var(--border); padding-bottom:10px;">Themen-Filter</h3>
@@ -105,38 +69,38 @@ h1, h2, h3 { margin:0 0 10px 0; }
 
 <div id="trainer-screen" class="wrap scroll-wrap hidden">
     <div class="top-bar">
-        <button class="btn btn-outline" onclick="location.reload()">Beenden</button>
+        <button class="btn btn-outline" onclick="window.location.href='index.html'">Beenden</button>
         <div class="streak-box">🔥 <span id="t-streak">0</span></div>
     </div>
     <div class="progress-track"><div id="t-progress" class="progress-fill"></div></div>
-    
     <div class="card">
-        <div class="q-meta">
-            <span id="t-mod">MODUL</span> • <span id="t-idx">1/10</span>
-            <span id="t-retry-badge" class="hidden" style="color:var(--error); margin-left:10px;">⚠ WIEDERHOLUNG</span>
-        </div>
+        <div class="q-meta"><span id="t-mod">MODUL</span> • <span id="t-idx">1/10</span></div>
         <div class="q-text" id="t-question"></div>
         <div class="opt-grid" id="t-options"></div>
-        
         <div id="t-expl" class="expl-box">
-            <span class="expl-title" id="t-expl-title"></span>
+            <span style="font-weight:bold; display:block; margin-bottom:5px;" id="t-expl-title"></span>
             <span id="t-expl-text"></span>
         </div>
     </div>
-    
     <button id="next-btn" class="btn btn-primary btn-block" style="display:none; margin-bottom:30px;" onclick="nextCard()">Nächste Frage ➔</button>
+</div>
+
+<div id="learn-screen" class="wrap scroll-wrap hidden">
+    <div class="top-bar">
+        <button class="btn btn-outline" onclick="window.location.href='index.html'">Zurück</button>
+        <div>Lernmodus InfoSi</div>
+    </div>
+    <div id="learn-list"></div>
 </div>
 
 <div id="exam-screen" class="wrap scroll-wrap hidden">
     <div class="top-bar">
-        <button class="btn btn-outline" onclick="if(confirm('Prüfung abbrechen?')) location.reload()">Abbrechen</button>
+        <button class="btn btn-outline" onclick="if(confirm('Abbrechen?')) window.location.href='index.html'">Abbrechen</button>
         <div>Prüfungssimulation</div>
     </div>
     <div id="exam-result-header" class="hidden"></div>
     <div id="exam-list"></div>
-    <div style="margin-top:30px; padding-top:20px; border-top:1px solid var(--border);">
-        <button id="btn-submit-exam" class="btn btn-primary btn-block" onclick="submitExam()">Prüfung jetzt abgeben</button>
-    </div>
+    <button id="btn-submit-exam" class="btn btn-primary btn-block" onclick="submitExam()">Prüfung abgeben</button>
 </div>
 
 <script>
@@ -442,71 +406,55 @@ const BANK = [
 ];
 
 /* --- LOGIC --- */
-let activeSet = [];
-let retryStack = [];
-let currentIndex = 0;
-let streak = 0;
-let isExam = false;
-let examAnswers = {};
+let activeSet = []; let retryStack = []; let currentIndex = 0; let streak = 0; let isExam = false; let examAnswers = {};
 
-function shuffle(arr) {
-    for(let i=arr.length-1; i>0; i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-}
+function shuffle(arr) { for(let i=arr.length-1; i>0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 
 function initTrainer(filter) {
-    isExam = false;
+    isExam = false; document.getElementById('start-screen').classList.add('hidden'); document.getElementById('trainer-screen').classList.remove('hidden');
+    activeSet = (filter === 'ALL') ? [...BANK] : BANK.filter(x => x.m === filter);
+    shuffle(activeSet); currentIndex = 0; streak = 0; retryStack = []; updateStreak(); loadCard();
+}
+
+function initLearnMode() {
     document.getElementById('start-screen').classList.add('hidden');
-    document.getElementById('trainer-screen').classList.remove('hidden');
-    
-    if(filter === 'ALL') activeSet = [...BANK];
-    else activeSet = BANK.filter(x => x.m === filter);
-    shuffle(activeSet);
-    currentIndex = 0;
-    streak = 0;
-    retryStack = [];
-    updateStreak();
-    loadCard();
+    document.getElementById('learn-screen').classList.remove('hidden');
+    const container = document.getElementById('learn-list');
+    container.innerHTML = '';
+    BANK.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'exam-item';
+        div.innerHTML = `
+            <div class="q-meta">${item.m}</div>
+            <div class="exam-q">${idx+1}. ${item.q}</div>
+            <div class="learn-a">Antwort: ${item.a}</div>
+            <div style="color:var(--muted); font-size:0.9rem; border-top:1px solid var(--border); padding-top:5px; margin-top:5px;">${item.e}</div>
+        `;
+        container.appendChild(div);
+    });
 }
 
 function loadCard() {
-    // Button immer erst ausblenden
     const nextBtn = document.getElementById('next-btn');
     nextBtn.style.display = 'none';
-
     if(currentIndex >= activeSet.length) {
-        if(retryStack.length > 0) {
-            alert(`Runde beendet. ${retryStack.length} Fehler wiederholen!`);
-            activeSet = [...retryStack];
-            retryStack = [];
-            currentIndex = 0;
-            shuffle(activeSet);
-        } else {
-            alert("Training abgeschlossen!");
-            location.reload();
-            return;
-        }
+        if(retryStack.length > 0) { alert(`${retryStack.length} Fehler werden wiederholt.`); activeSet = [...retryStack]; retryStack = []; currentIndex = 0; shuffle(activeSet); } 
+        else { alert("Fertig!"); window.location.href='index.html'; return; }
     }
     const item = activeSet[currentIndex];
     document.getElementById('t-mod').innerText = item.m;
     document.getElementById('t-idx').innerText = `${currentIndex+1} / ${activeSet.length}`;
     document.getElementById('t-question').innerText = item.q;
-    document.getElementById('t-retry-badge').classList.toggle('hidden', retryStack.includes(item));
     document.getElementById('t-progress').style.width = `${(currentIndex/activeSet.length)*100}%`;
     const c = document.getElementById('t-options');
-    c.innerHTML = '';
+    c.innerHTML = ''; c.classList.remove('locked');
     document.getElementById('t-expl').style.display = 'none';
-    
     let opts = item.o.map(o => ({ txt:o, isCorrect: o===item.a }));
     shuffle(opts);
-    
     opts.forEach((o, i) => {
         const btn = document.createElement('div');
         btn.className = 'opt-btn';
-        btn.innerHTML = `<div class="opt-key">${i+1}</div> <div>${o.txt}</div>`;
+        btn.innerHTML = `<div style="background:rgba(0,0,0,0.3); width:28px; height:28px; display:flex; align-items:center; justify-content:center; border-radius:6px; margin-right:15px;">${i+1}</div> <div>${o.txt}</div>`;
         btn.onclick = () => checkTrainerAnswer(btn, o.isCorrect, item);
         c.appendChild(btn);
     });
@@ -515,143 +463,55 @@ function loadCard() {
 function checkTrainerAnswer(btn, isCorrect, item) {
     if(btn.parentElement.classList.contains('locked')) return;
     btn.parentElement.classList.add('locked');
-    const explBox = document.getElementById('t-expl');
-    explBox.style.display = 'block';
-    explBox.className = 'expl-box ' + (isCorrect ? 'is-correct' : 'is-wrong');
-    document.getElementById('t-expl-title').innerText = isCorrect ? "✓ Richtig!" : "✗ Leider falsch.";
+    const ex = document.getElementById('t-expl');
+    ex.style.display = 'block';
+    ex.className = 'expl-box ' + (isCorrect ? 'is-correct' : 'is-wrong');
+    document.getElementById('t-expl-title').innerText = isCorrect ? "✓ Korrekt" : "✗ Falsch";
     document.getElementById('t-expl-text').innerText = item.e;
-    
-    // Vibration
-    if(navigator.vibrate) {
-        if(!isCorrect) navigator.vibrate(200); 
-        else navigator.vibrate(50);
-    }
-
-    if(isCorrect) {
-        btn.classList.add('correct');
-        streak++;
-    } else {
-        btn.classList.add('wrong');
-        streak = 0;
-        retryStack.push(item);
-        Array.from(document.querySelectorAll('.opt-btn')).forEach(b => {
-            if(b.innerText.includes(item.a)) b.classList.add('correct');
-        });
+    if(navigator.vibrate) navigator.vibrate(isCorrect ? 50 : 200);
+    if(isCorrect) { btn.classList.add('correct'); streak++; }
+    else { btn.classList.add('wrong'); streak = 0; retryStack.push(item);
+           Array.from(document.querySelectorAll('.opt-btn')).forEach(b => { if(b.innerText.includes(item.a)) b.classList.add('correct'); });
     }
     updateStreak();
-    
-    // Button anzeigen & hinscrollen
-    const nextBtn = document.getElementById('next-btn');
-    nextBtn.style.display = 'block';
-    nextBtn.scrollIntoView({behavior: "smooth", block: "center"});
+    const nb = document.getElementById('next-btn'); nb.style.display = 'block';
+    setTimeout(() => { nb.scrollIntoView({behavior: "smooth", block: "center"}); }, 100);
 }
 
-function nextCard() {
-    const opts = document.getElementById('t-options');
-    if(!opts.classList.contains('locked')) return;
-    currentIndex++;
-    opts.classList.remove('locked');
-    loadCard();
-}
-
-function updateStreak() {
-    document.getElementById('t-streak').innerText = streak;
-}
+function nextCard() { currentIndex++; loadCard(); }
+function updateStreak() { document.getElementById('t-streak').innerText = streak; }
 
 function initExam() {
-    isExam = true;
-    document.getElementById('start-screen').classList.add('hidden');
-    document.getElementById('exam-screen').classList.remove('hidden');
-    
-    let pool = [...BANK];
-    shuffle(pool);
-    activeSet = pool.slice(0, 45);
-    examAnswers = {};
-    const container = document.getElementById('exam-list');
-    container.innerHTML = '';
+    isExam = true; document.getElementById('start-screen').classList.add('hidden'); document.getElementById('exam-screen').classList.remove('hidden');
+    activeSet = shuffle([...BANK]).slice(0, 45);
+    const container = document.getElementById('exam-list'); container.innerHTML = '';
     activeSet.forEach((item, idx) => {
-        let opts = [...item.o];
-        shuffle(opts);
-        const div = document.createElement('div');
-        div.className = 'exam-item';
-        div.id = `exam-q-${idx}`;
-        div.innerHTML = `
-            <div class="q-meta">Frage ${idx+1}</div>
-            <div class="exam-q">${item.q}</div>
-            ${opts.map(o => `
-                <label class="exam-opt">
-                    <input type="radio" name="q${idx}" value="${o}" onchange="examAnswers[${idx}]='${o}'">
-                    <span>${o}</span>
-                </label>
-            `).join('')}
-            <div class="exam-expl">
-                <strong>Lösung:</strong> ${item.a}<br>
-                <div style="margin-top:5px; padding-left:10px; border-left:2px solid var(--accent);">${item.e}</div>
-            </div>
-        `;
+        let opts = shuffle([...item.o]);
+        const div = document.createElement('div'); div.className = 'exam-item';
+        div.innerHTML = `<div class="exam-q">${idx+1}. ${item.q}</div>` + 
+            opts.map(o => `<label class="exam-opt"><input type="radio" name="q${idx}" value="${o}" onchange="examAnswers[${idx}]='${o}'"> ${o}</label>`).join('');
         container.appendChild(div);
     });
 }
 
 function submitExam() {
-    if(Object.keys(examAnswers).length < activeSet.length) {
-        if(!confirm(`Erst ${Object.keys(examAnswers).length} von ${activeSet.length} Fragen beantwortet. Abgeben?`)) return;
-    }
-    let score = 0;
-    activeSet.forEach((item, idx) => {
-        const userAns = examAnswers[idx];
-        const div = document.getElementById(`exam-q-${idx}`);
-        div.querySelectorAll('input').forEach(inp => inp.disabled = true);
-        if(userAns === item.a) {
-            score++;
-            div.classList.add('graded-correct');
-        } else {
-            div.classList.add('graded-wrong');
-        }
-    });
+    let score = 0; activeSet.forEach((item, idx) => { if(examAnswers[idx] === item.a) score++; });
     const perc = Math.round((score/activeSet.length)*100);
     const header = document.getElementById('exam-result-header');
-    header.innerHTML = `
-        <div class="exam-score-box">
-            <div style="font-size:3rem; font-weight:800; color:${perc>=65?'var(--success)':'var(--error)'}">${perc}%</div>
-            <div style="font-size:1.2rem; margin-bottom:10px;">${score} / ${activeSet.length} Punkte</div>
-            <div style="font-weight:bold; color:var(--muted)">${perc>=65?'Bestanden':'Nicht bestanden'}</div>
-        </div>
-    `;
-    header.classList.remove('hidden');
-    document.getElementById('btn-submit-exam').style.display = 'none';
-    window.scrollTo(0,0);
+    header.innerHTML = `<div style="background:var(--panel); padding:20px; border-radius:15px; text-align:center; margin-bottom:20px; border:1px solid var(--border)"><h2>${perc}%</h2><p>${score} von ${activeSet.length} richtig</p></div>`;
+    header.classList.remove('hidden'); window.scrollTo(0,0);
 }
-
-document.addEventListener('keydown', (e) => {
-    if(isExam || document.getElementById('trainer-screen').classList.contains('hidden')) return;
-    if(['1','2','3','4'].includes(e.key)) {
-        const idx = parseInt(e.key)-1;
-        const btns = document.querySelectorAll('.opt-btn');
-        if(btns[idx]) btns[idx].click();
-    }
-    if(e.code === 'Space') {
-        e.preventDefault();
-        nextCard();
-    }
-});
 
 const modules = [...new Set(BANK.map(x=>x.m))];
 const modContainer = document.getElementById('module-list');
 modules.forEach(m => {
-    const btn = document.createElement('div');
-    btn.className = 'mode-card';
-    btn.style.padding = '10px 15px';
-    btn.style.marginBottom = '0';
+    const btn = document.createElement('div'); btn.className = 'mode-card'; 
     btn.innerHTML = `<span style="font-weight:bold; font-size:0.9rem;">${m}</span>`;
-    btn.onclick = () => initTrainer(m);
-    modContainer.appendChild(btn);
+    btn.onclick = () => initTrainer(m); modContainer.appendChild(btn);
 });
 </script>
-<!-- Back to index button -->
-<a href="index.html" class="btn btn-outline" style="position:fixed; right:16px; bottom:16px; z-index:999;">Zurück zur Startseite</a>
+<a href="index.html" class="btn btn-outline" style="position:fixed; right:16px; bottom:16px; z-index:999; background: var(--bg);">Zurück</a>
 </body>
 </html>
-
 
 
