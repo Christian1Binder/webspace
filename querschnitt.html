@@ -159,7 +159,26 @@ const BANK = [
         e: "Die BesAnFm regeln die spezifischen Details der Kommunikation für eine Übung oder einen Einsatz.", 
         o: ["ZDv 3/12.", "Taschenkarte Recht.", "Besondere Anweisungen für das Fernmeldewesen (BesAnFm).", "Schießbuch."], 
         m: "ORGANISATION" 
-    }
+    },
+    {q:"Welchen Frequenzbereich nutzt das VHF-Funkgerät SEM 80/90 primär?",a:"30,000 bis 79,975 MHz",e:"Arbeitet im UKW-Bereich (VHF) mit 25 kHz Kanalabstand.",o:["1,5 bis 30 MHz","30,000 bis 79,975 MHz","225 bis 400 MHz","400 bis 470 MHz"],m:"FUNKGERÄTE"},
+    {q:"Was beschreibt der Begriff 'Hüpfen' (Frequency Hopping) im Fernmeldebetrieb?",a:"Ein schnelles Wechseln der Frequenzen zum Schutz gegen elektronische Aufklärung.",e:"Erschwert das Mitlesen und Stören des Funkverkehrs durch den Gegner.",o:["Das Springen von einem Funkkreis in den nächsten.","Ein schnelles Wechseln der Frequenzen zum Schutz gegen elektronische Aufklärung.","Die Nutzung von Relaisstationen.","Das Verstärken der Sendeleistung."],m:"ÜBERTRAGUNG"},
+    {q:"Wofür steht die Abkürzung 'HRM' im Zusammenhang mit Kurzwellenfunk?",a:"High Frequency Radio Modem",e:"Ermöglicht digitale Datenübertragung über weite Distanzen im HF-Bereich.",o:["High Range Messenger","High Frequency Radio Modem","Heeres-Radio-Modul","Hybrid-Relais-Management"],m:"FUNKGERÄTE"},
+    {q:"Wo sind für die Bundeswehr Abweichungen von Vorgaben des Arbeitsschutzgesetzes geregelt?",a:"BMVg ArbSchGAnwV",e:"Regelt spezifische Ausnahmen für die Streitkräfte.",o:["Soldatengesetz","BMVg ArbSchGAnwV","Strafgesetzbuch","Grundgesetz"],m:"ARBEITSSCHUTZ"},
+    {q:"Wie lautet das Ziel von Arbeitsschutz?",a:"Gefährdungen ausschließen, um die Sicherheit im Dienst zu gewährleisten",e:"Prävention zur Vermeidung von Unfällen und Gesundheitsschäden.",o:["Kostenersparnis","Vermeidung von Schreibarbeit","Gefährdungen ausschließen, um die Sicherheit im Dienst zu gewährleisten","Einhaltung der Ruhezeiten"],m:"ARBEITSSCHUTZ"},
+    {q:"Unterschied Unfallanzeige / Vermerk?",a:"Anzeige = Krankheitsbedingte Abwesenheit",e:"Anzeige ist zwingend bei Dienstunfällen mit Arbeitsunfähigkeit.",o:["Kein Unterschied","Anzeige = Krankheitsbedingte Abwesenheit","Vermerk nur für Zivilisten","Anzeige nur bei Sachschaden"],m:"ARBEITSSCHUTZ"},
+    {q:"Wer entfernt einen Zeckenbiss?",a:"SanPers während des Dienstes, außerhalb sie selbst",e:"Im Dienst SanPers aufsuchen, privat Eigenhilfe zulässig.",o:["Nur Vorgesetzte","Jeder Kamerad","SanPers während des Dienstes, außerhalb sie selbst","Nur ziviler Notarzt"],m:"ARBEITSSCHUTZ"},
+    {q:"Wegeunfall: Wann besteht KEIN Versicherungsschutz?",a:"Semmel kaufen auf direktem Weg",e:"Private Unterbrechungen heben den Schutz auf.",o:["Semmel kaufen auf direktem Weg","Direkter Weg von Wohnung","Fahrt mit Fahrgemeinschaft","Umweg wegen Baustelle"],m:"ARBEITSSCHUTZ"},
+    {q:"Nutzungsbedingungen elektr. Kleingeräte in mil. Liegenschaften?",a:"Namentliche Zuordnung, CE-Zeichen, max. 1500 Watt",e:"Geräte müssen geprüft sein und Lastgrenzen einhalten.",o:["Markenhersteller","Namentliche Zuordnung, CE-Zeichen, max. 1500 Watt","Keine Einschränkungen","Nur Batteriebetrieb"],m:"ARBEITSSCHUTZ"},
+    {q:"Was bedeutet der Schallwert 100.000?",a:"Lärmbelastungskonto, was nicht leer werden darf",e:"Kontingent zur Vermeidung von Gehörschäden.",o:["Max. Dezibel","Lärmbelastungskonto, was nicht leer werden darf","Schuss pro Jahr","Funk-Frequenzbereich"],m:"ARBEITSSCHUTZ"},
+    {q:"Übungen in Wasserschutzgebieten?",a:"Ja, aber nicht in Schutzzone I + II",e:"Schutzzonen I/II sind wegen Trinkwassergefahr gesperrt.",o:["Ja, uneingeschränkt","Nein, niemals","Ja, aber nicht in Schutzzone I + II","Nur mit Genehmigung"],m:"UMWELT"},
+    {q:"Wo dürfen Übungen abgehalten werden?",a:"Staatsforst",e:"Staatsforst ist unter Auflagen nutzbar (im Ggs. zu Nationalparks).",o:["Nationalpark","Staatsforst","Wohngebiet","Naturschutzgebiet"],m:"UMWELT"},
+    {q:"Weiß markierter Deckel beim Kanister?",a:"Wasser",e:"Weiße Kennzeichnung zur Unterscheidung von Kraftstoff.",o:["Benzin","Diesel","Wasser","Altöl"],m:"UMWELT"},
+    {q:"Aufbewahrung Übergabeverhandlung?",a:"Bis die TE erneut übergeben wird",e:"Dokumentation muss bis zur nächsten Verantwortungsänderung bleiben.",o:["2 Jahre","10 Jahre","Bis die TE erneut übergeben wird","6 Monate"],m:"MAT-ERHALT"},
+    {q:"Wie lange ist eine MAK maximal gültig?",a:"4 Wochen",e:"Nach 4 Wochen Abrechnung oder Erneuerung nötig.",o:["1 Woche","4 Wochen","6 Monate","1 Jahr"],m:"MAT-ERHALT"},
+    {q:"Was beschreibt Einsatzfähigkeit?",a:"Erfüllung Soll-Zustands",e:"Gleichklang von Personal/Material mit Soll-Vorgaben.",o:["Soldaten wach","Erfüllung Soll-Zustands","Nur Panzerzustand","Anwesenheit Appell"],m:"MAT-ERHALT"},
+    {q:"Ab wann Übergabeverhandlung durchführen?",a:"DP-Wechsel ab TE-Führer",e:"Wechsel der personellen Verantwortung ab TE-Ebene ist formalpflichtig.",o:["Bei jedem Urlaub","DP-Wechsel ab TE-Führer","Nur bei Beförderung","Täglich"],m:"MAT-ERHALT"},
+    {q:"Wer bestimmt Umfang der Übergabe?",a:"Übernehmender",e:"Der Übernehmende bestimmt die Prüftiefe.",o:["Abgebender","Übernehmender","Der Spieß","Logzentrum"],m:"MAT-ERHALT"},
+    {q:"Abwesenheit über x Wochen: Material übergeben?",a:"6 Wochen",e:"Ab 6 Wochen Abwesenheit ist formale Übergabe Pflicht.",o:["2 Wochen","4 Wochen","6 Wochen","12 Wochen"],m:"MAT-ERHALT"}
 ];
 
 /* --- LOGIC (Analog zum System) --- */
